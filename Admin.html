@@ -234,12 +234,15 @@
         .d-value { font-size: 1.1rem; color: #333; font-weight: 800; font-family: 'Baloo Da 2', sans-serif;}
         .edit-hint { position: absolute; top: 5px; right: 5px; font-size: 0.6rem; color: #aaa; }
 
-        /* --- মেম্বার লিস্ট --- */
-        .member-list-card {
+        /* --- তালিকা কার্ড --- */
+        .member-list-card, .investment-list-card {
             background: white;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .investment-list-card {
+             margin-bottom: 20px; /* Changed */
         }
 
         .list-header {
@@ -256,18 +259,48 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
+            padding: 10px 20px;
             border-bottom: 1px solid #f0f0f0;
-            cursor: pointer;
             transition: 0.2s;
         }
         .member-item:active { background: #f5f5f5; }
+        
+        .member-info {
+            flex-grow: 1;
+            cursor: pointer;
+        }
 
         .m-name { font-weight: 700; color: #333; font-size: 1.1rem; display: block; }
         .m-id { font-size: 0.85rem; color: #777; }
+        
+        .member-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+        
         .status-badge { font-size: 0.75rem; padding: 4px 10px; border-radius: 10px; font-weight: 700; }
         .active { background: #e8f5e9; color: #2e7d32; }
         .inactive { background: #ffebee; color: #c62828; }
+        
+        .m-delete-btn {
+            color: #ef4444; 
+            background-color: #fee2e2; 
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 0.9rem;
+        }
+        .m-delete-btn:hover {
+            background-color: #fecaca;
+        }
+
 
         /* --- মডাল --- */
         .modal {
@@ -392,13 +425,14 @@
 
         .notice-list {
             list-style: none;
+            padding:0;
             margin-top: 15px;
             max-height: 250px;
             overflow-y: auto;
             border-top: 1px solid #eee;
             padding-top: 10px;
         }
-        .notice-item {
+        .notice-item, .investment-item {
             background: #f8fafc;
             padding: 10px;
             margin-bottom: 8px;
@@ -406,8 +440,10 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            border-left: 4px solid #673ab7;
         }
+        .notice-item { border-left: 4px solid #673ab7; }
+        .investment-item { border-left: 4px solid var(--secondary-teal); }
+
         .n-content { flex: 1; margin-right: 10px; }
         .n-date { display: block; font-size: 0.75rem; color: #888; margin-bottom: 3px; }
         .n-text { font-size: 0.95rem; color: #333; line-height: 1.3; font-family: 'Tiro Bangla', serif; }
@@ -455,6 +491,19 @@
             </button>
         </div>
 
+        <!-- সর্বশেষ বিনিয়োগ (নতুন স্থান) -->
+        <div class="investment-list-card">
+            <div class="list-header" style="background: var(--secondary-teal);">
+                <span><i class="fas fa-chart-line"></i> সর্বশেষ বিনিয়োগ</span>
+                <button class="btn-ctrl" style="background: white; color: black; font-size: 0.8rem; padding: 5px 12px; box-shadow: none;" onclick="openInvestmentModal()">
+                    <i class="fas fa-plus"></i> নতুন যোগ
+                </button>
+            </div>
+            <div id="investmentContainer" style="padding: 15px; max-height: 300px; overflow-y: auto;">
+                <p style="text-align:center; padding: 20px; color:#888;">লোড হচ্ছে...</p>
+            </div>
+        </div>
+
         <!-- সার্চ -->
         <div class="search-box">
             <i class="fas fa-search" style="color:#aaa;"></i>
@@ -477,7 +526,6 @@
                     <span class="d-value">৳ <span id="dash-total-loan">0</span></span>
                 </div>
             </div>
-            <!-- কল্যাণ তহবিল কার্ড -->
             <div class="dash-card c-welfare" onclick="updateOrgStat('welfare', 'কল্যাণ তহবিল')">
                 <i class="fas fa-edit edit-hint"></i>
                 <div class="dash-icon bg-welfare"><i class="fas fa-hand-holding-heart"></i></div>
@@ -486,7 +534,6 @@
                     <span class="d-value">৳ <span id="dash-welfare">0</span></span>
                 </div>
             </div>
-            <!-- মোট খরচ কার্ড -->
             <div class="dash-card c-expense" onclick="updateOrgStat('expense', 'মোট খরচ')">
                 <i class="fas fa-edit edit-hint"></i>
                 <div class="dash-icon bg-expense"><i class="fas fa-file-invoice-dollar"></i></div>
@@ -507,10 +554,10 @@
                 <p style="text-align:center; padding: 20px; color:#888;">লোড হচ্ছে...</p>
             </div>
         </div>
+
     </div>
 
-    <!-- মডালসমূহ (এডিট, নতুন মেম্বার, নোটিশ, চ্যাট) -->
-    <!-- (আগের মতোই থাকবে সব HTML মডাল) -->
+    <!-- মডালসমূহ -->
 
     <!-- এডিট মডাল -->
     <div id="editModal" class="modal">
@@ -577,6 +624,16 @@
         </div>
     </div>
 
+    <!-- নতুন বিনিয়োগ মডাল -->
+    <div id="investmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('investmentModal')">&times;</span>
+            <h2 style="margin-bottom:15px; color:var(--secondary-teal);"><i class="fas fa-chart-line"></i> নতুন বিনিয়োগ</h2>
+            <textarea id="newInvestmentText" placeholder="বিনিয়োগের বিবরণ এখানে লিখুন..." rows="4"></textarea>
+            <button class="btn-save" style="background:var(--secondary-teal);" onclick="addInvestment()">সংরক্ষণ করুন</button>
+        </div>
+    </div>
+
     <!-- চ্যাট ড্যাশবোর্ড মডাল -->
     <div id="chatModal" class="modal">
         <div class="modal-content" style="max-width: 800px;">
@@ -601,16 +658,15 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <script>
-     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBkRUcyisQYgIScMknjRNKqrmCLpZUd3yU",
-  authDomain: "annoor-foundation.firebaseapp.com",
-  projectId: "annoor-foundation",
-  storageBucket: "annoor-foundation.firebasestorage.app",
-  messagingSenderId: "823540670524",
-  appId: "1:823540670524:web:7ff8f0bfaca7e81d67a339",
-  measurementId: "G-PRC8XZGVPW"
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyBkRUcyisQYgIScMknjRNKqrmCLpZUd3yU",
+      authDomain: "annoor-foundation.firebaseapp.com",
+      projectId: "annoor-foundation",
+      storageBucket: "annoor-foundation.firebasestorage.app",
+      messagingSenderId: "823540670524",
+      appId: "1:823540670524:web:7ff8f0bfaca7e81d67a339",
+      measurementId: "G-PRC8XZGVPW"
+    };
 
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
@@ -618,6 +674,7 @@ const firebaseConfig = {
         let allMembers = {};
         let currentEditID = "";
         let allNotices = {};
+        let allInvestments = {};
         let activeChatUserId = "";
 
         // ডাটা লোড
@@ -628,7 +685,6 @@ const firebaseConfig = {
                 calculateDashboard(allMembers);
             });
             
-            // অর্গ স্ট্যাট লোড (Welfare and Expense)
             db.ref('org_stats').on('value', (snapshot) => {
                 const stats = snapshot.val() || { welfare: 0, expense: 0 };
                 document.getElementById('dash-welfare').innerText = Number(stats.welfare || 0).toLocaleString('en-US');
@@ -639,36 +695,30 @@ const firebaseConfig = {
                 allNotices = snapshot.val() || {};
                 renderAdminNotices();
             });
+
+            db.ref('investments').on('value', (snapshot) => {
+                allInvestments = snapshot.val() || {};
+                renderInvestments();
+            });
         }
 
-        // --- কল্যাণ তহবিল ও খরচ আপডেট ফাংশন (FIXED) ---
         function updateOrgStat(key, label) {
-            // বর্তমান ভ্যালু নেওয়া (কমা সরিয়ে)
             const targetId = (key === 'welfare') ? 'dash-welfare' : 'dash-expense';
             const currentVal = document.getElementById(targetId).innerText.replace(/,/g, '');
-            
             const newVal = prompt(`${label} এর নতুন পরিমাণ লিখুন:`, currentVal);
             
-            // যদি ইউজার ক্যান্সেল না করে এবং ভ্যালু দেয়
             if (newVal !== null && newVal.trim() !== "") {
                 const numericValue = Number(newVal);
-                
                 if (!isNaN(numericValue)) {
-                    // ফায়ারবেজে সেভ করা
                     db.ref('org_stats/' + key).set(numericValue)
-                    .then(() => {
-                        console.log(label + " আপডেট সফল!");
-                    })
-                    .catch((error) => {
-                        alert("ত্রুটি: " + error.message);
-                    });
+                    .then(() => console.log(label + " আপডেট সফল!"))
+                    .catch((error) => alert("ত্রুটি: " + error.message));
                 } else {
                     alert("দয়া করে সঠিক সংখ্যা লিখুন।");
                 }
             }
         }
 
-        // --- ড্যাশবোর্ড হিসাব ---
         function calculateDashboard(members) {
             let totalDeposit = 0, totalLoan = 0;
             Object.values(members).forEach(m => {
@@ -681,7 +731,6 @@ const firebaseConfig = {
             document.getElementById('dash-total-loan').innerText = totalLoan.toLocaleString('en-US');
         }
 
-        // --- মেম্বার লিস্ট রেন্ডার ---
         function renderList(members) {
             const container = document.getElementById('memberContainer');
             container.innerHTML = '';
@@ -690,30 +739,50 @@ const firebaseConfig = {
 
             keys.forEach(id => {
                 const m = members[id];
+                const name = m.profile.name || 'নাম নেই';
+                const memNo = m.profile.memNo || 'N/A';
                 const statusCls = m.status === 'active' ? 'active' : 'inactive';
                 container.innerHTML += `
-                    <div class="member-item" onclick="openEditModal('${id}')">
-                        <div>
-                            <span class="m-name">${m.profile.name}</span>
-                            <span class="m-id">আইডি: ${id} | নং: ${m.profile.memNo}</span>
+                    <div class="member-item">
+                        <div class="member-info" onclick="openEditModal('${id}')">
+                            <span class="m-name">${name}</span>
+                            <span class="m-id">আইডি: ${id} | নং: ${memNo}</span>
                         </div>
-                        <span class="status-badge ${statusCls}">${m.status}</span>
+                        <div class="member-controls">
+                            <span class="status-badge ${statusCls}">${m.status}</span>
+                            <div class="m-delete-btn" onclick="confirmDeleteMember(event, '${id}', '${name}')" title="সদস্য মুছুন">
+                                <i class="fas fa-trash-alt"></i>
+                            </div>
+                        </div>
                     </div>`;
             });
         }
 
-        // --- সার্চ ফিল্টার ---
+        function confirmDeleteMember(event, id, name) {
+            event.stopPropagation();
+            const confirmation = confirm(`আপনি কি নিশ্চিতভাবে "${name}" (আইডি: ${id}) কে মুছে ফেলতে চান? এই প্রক্রিয়াটি আর ফেরানো যাবে না।`);
+            
+            if (confirmation) {
+                db.ref('users/' + id).remove()
+                    .then(() => db.ref('chats/' + id).remove())
+                    .then(() => alert(`"${name}" কে সফলভাবে মুছে ফেলা হয়েছে।`))
+                    .catch((error) => alert("সদস্যকে মুছতে একটি সমস্যা হয়েছে।"));
+            }
+        }
+
         function filterMembers() {
             const term = document.getElementById('searchInput').value.toLowerCase();
             const filtered = {};
             Object.keys(allMembers).forEach(id => {
                 const m = allMembers[id];
-                if(id.includes(term) || m.profile.name.toLowerCase().includes(term)) filtered[id] = m;
+                const name = m.profile.name || "";
+                if(id.includes(term) || name.toLowerCase().includes(term)) {
+                    filtered[id] = m;
+                }
             });
             renderList(filtered);
         }
 
-        // --- চ্যাট ফাংশন ---
         function openChatModal() {
             document.getElementById('chatModal').style.display = 'block';
             loadChatUsers();
@@ -740,69 +809,67 @@ const firebaseConfig = {
                 const messages = snapshot.val() || {};
                 const msgDiv = document.getElementById('chatMessages');
                 msgDiv.innerHTML = '';
-                Object.values(messages).forEach(m => {
+                const sortedMessages = Object.values(messages).sort((a,b) => a.timestamp - b.timestamp);
+                
+                sortedMessages.forEach(m => {
                     const typeCls = m.sender === 'admin' ? 'msg-admin' : 'msg-user';
-                    msgDiv.innerHTML += `<div class="msg ${typeCls}">${m.text}<span class="msg-time">${m.time || ''}</span></div>`;
+                    const timeString = m.timestamp ? new Date(m.timestamp).toLocaleTimeString('bn-BD', {hour: '2-digit', minute:'2-digit'}) : '';
+                    msgDiv.innerHTML += `<div class="msg ${typeCls}">${m.text}<span class="msg-time">${timeString}</span></div>`;
                 });
                 msgDiv.scrollTop = msgDiv.scrollHeight;
             });
         }
 
         function handleChatKey(e) { if(e.key === 'Enter') sendAdminMessage(); }
+
         function sendAdminMessage() {
             const text = document.getElementById('adminMsgInput').value.trim();
             if(!activeChatUserId || !text) return;
-            db.ref('chats/' + activeChatUserId).push({
-                sender: 'admin', text: text,
-                time: new Date().toLocaleTimeString('bn-BD', {hour: '2-digit', minute:'2-digit'})
-            }).then(() => { document.getElementById('adminMsgInput').value = ''; });
+            
+            const message = {
+                sender: 'admin',
+                text: text,
+                timestamp: firebase.database.ServerValue.TIMESTAMP 
+            };
+            
+            db.ref('chats/' + activeChatUserId).push(message).then(() => {
+                document.getElementById('adminMsgInput').value = '';
+            });
         }
 
-        // --- মেম্বার ডাটা সেভ এবং মডাল ক্লোজ ---
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
         function openEditModal(id) {
             currentEditID = id;
             const m = allMembers[id];
             document.getElementById('modalTitle').innerText = "এডিট আইডি: " + id;
-            document.getElementById('p-name').value = m.profile.name;
-            document.getElementById('p-memNo').value = m.profile.memNo;
-            document.getElementById('p-share').value = m.profile.share;
-            document.getElementById('p-oneShare').value = m.profile.oneShare;
-            document.getElementById('p-nominee').value = m.profile.nominee;
-            document.getElementById('p-address').value = m.profile.address;
-            document.getElementById('p-bg').value = m.profile.bg;
-            document.getElementById('s-total').value = m.stats.total;
-            document.getElementById('s-last').value = m.stats.last;
-            document.getElementById('s-date').value = m.stats.lastDate;
-            document.getElementById('s-due').value = m.stats.due;
-            document.getElementById('s-pTotal').value = m.stats.profitTotal;
-            document.getElementById('s-pYear').value = m.stats.profitYear;
-            document.getElementById('s-loan').value = m.stats.loan;
+            const profile = m.profile || {};
+            const stats = m.stats || {};
+            
+            document.getElementById('p-name').value = profile.name || '';
+            document.getElementById('p-memNo').value = profile.memNo || '';
+            document.getElementById('p-share').value = profile.share || '';
+            document.getElementById('p-oneShare').value = profile.oneShare || '';
+            document.getElementById('p-nominee').value = profile.nominee || '';
+            document.getElementById('p-address').value = profile.address || '';
+            document.getElementById('p-bg').value = profile.bg || '';
+            
+            document.getElementById('s-total').value = stats.total || 0;
+            document.getElementById('s-last').value = stats.last || 0;
+            document.getElementById('s-date').value = stats.lastDate || '';
+            document.getElementById('s-due').value = stats.due || 0;
+            document.getElementById('s-pTotal').value = stats.profitTotal || 0;
+            document.getElementById('s-pYear').value = stats.profitYear || 0;
+            document.getElementById('s-loan').value = stats.loan || 0;
+            
             document.getElementById('s-status').value = m.status || 'active';
             document.getElementById('editModal').style.display = 'block';
         }
 
         function saveData() {
             const updated = {
-                profile: {
-                    name: document.getElementById('p-name').value,
-                    memNo: document.getElementById('p-memNo').value,
-                    share: document.getElementById('p-share').value,
-                    oneShare: document.getElementById('p-oneShare').value,
-                    nominee: document.getElementById('p-nominee').value,
-                    address: document.getElementById('p-address').value,
-                    bg: document.getElementById('p-bg').value
-                },
-                stats: {
-                    total: Number(document.getElementById('s-total').value),
-                    last: Number(document.getElementById('s-last').value),
-                    lastDate: document.getElementById('s-date').value,
-                    due: Number(document.getElementById('s-due').value),
-                    profitTotal: Number(document.getElementById('s-pTotal').value),
-                    profitYear: Number(document.getElementById('s-pYear').value),
-                    loan: Number(document.getElementById('s-loan').value)
-                },
+                profile: { name: document.getElementById('p-name').value, memNo: document.getElementById('p-memNo').value, share: document.getElementById('p-share').value, oneShare: document.getElementById('p-oneShare').value, nominee: document.getElementById('p-nominee').value, address: document.getElementById('p-address').value, bg: document.getElementById('p-bg').value },
+                stats: { total: Number(document.getElementById('s-total').value), last: Number(document.getElementById('s-last').value), lastDate: document.getElementById('s-date').value, due: Number(document.getElementById('s-due').value), profitTotal: Number(document.getElementById('s-pTotal').value), profitYear: Number(document.getElementById('s-pYear').value), loan: Number(document.getElementById('s-loan').value) },
                 status: document.getElementById('s-status').value
             };
             db.ref('users/' + currentEditID).update(updated).then(() => {
@@ -816,30 +883,89 @@ const firebaseConfig = {
             const id = document.getElementById('new-id').value.trim();
             const name = document.getElementById('new-name').value.trim();
             const memNo = document.getElementById('new-memNo').value.trim();
-            if (!id || !name) return;
+            if (!id || !name) {
+                alert("মেম্বার আইডি এবং নাম অবশ্যই পূরণ করতে হবে।");
+                return;
+            }
             db.ref('users/' + id).set({
                 profile: { name: name, memNo: memNo, share: '0', oneShare: '0', nominee: '', address: '', bg: '' },
                 stats: { total: 0, last: 0, lastDate: '', due: 0, loan: 0, profitTotal: 0, profitYear: 0 },
                 status: 'active'
-            }).then(() => { closeModal('addMemberModal'); });
+            }).then(() => { 
+                alert("নতুন সদস্য যোগ করা হয়েছে।");
+                closeModal('addMemberModal'); 
+                document.getElementById('new-id').value = '';
+                document.getElementById('new-name').value = '';
+                document.getElementById('new-memNo').value = '';
+            });
         }
 
         function openNoticeModal() { document.getElementById('noticeModal').style.display = 'block'; }
         function addNotice() {
             const text = document.getElementById('newNoticeText').value.trim();
             if(!text) return;
-            db.ref('notices').push({ text: text, date: new Date().toLocaleDateString('bn-BD') })
+            const date = new Date().toLocaleDateString('bn-BD', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            db.ref('notices').push({ text: text, date: date })
             .then(() => { document.getElementById('newNoticeText').value = ''; });
         }
-        function deleteNotice(k) { if(confirm("মুছবেন?")) db.ref('notices/' + k).remove(); }
+        function deleteNotice(k) { if(confirm("আপনি কি এই নোটিশটি মুছতে চান?")) db.ref('notices/' + k).remove(); }
         function renderAdminNotices() {
             const list = document.getElementById('adminNoticeList');
             list.innerHTML = '';
+            if (Object.keys(allNotices).length === 0) {
+                list.innerHTML = '<p style="text-align:center;color:#999;">কোনো নোটিশ নেই।</p>';
+                return;
+            }
             Object.keys(allNotices).reverse().forEach(k => {
                 const n = allNotices[k];
                 list.innerHTML += `<li class="notice-item"><div class="n-content"><span class="n-date">${n.date}</span><div class="n-text">${n.text}</div></div>
                     <div class="n-delete" onclick="deleteNotice('${k}')"><i class="fas fa-trash-alt"></i></div></li>`;
             });
+        }
+
+        function openInvestmentModal() { document.getElementById('investmentModal').style.display = 'block'; }
+        
+        function addInvestment() {
+            const text = document.getElementById('newInvestmentText').value.trim();
+            if(!text) return;
+            const date = new Date().toLocaleDateString('bn-BD', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            db.ref('investments').push({ text: text, date: date })
+            .then(() => { 
+                document.getElementById('newInvestmentText').value = ''; 
+                closeModal('investmentModal');
+                alert("বিনিয়োগের তথ্য যোগ করা হয়েছে।");
+            });
+        }
+
+        function deleteInvestment(k) { if(confirm("আপনি কি এই বিনিয়োগের তথ্যটি মুছতে চান?")) db.ref('investments/' + k).remove(); }
+        
+        function renderInvestments() {
+            const container = document.getElementById('investmentContainer');
+            container.innerHTML = '';
+            if (Object.keys(allInvestments).length === 0) {
+                container.innerHTML = '<p style="text-align:center;color:#999;">কোনো বিনিয়োগের তথ্য নেই।</p>';
+                return;
+            }
+            
+            const list = document.createElement('ul');
+            list.style.listStyle = 'none';
+            list.style.padding = '0';
+
+            Object.keys(allInvestments).reverse().forEach(k => {
+                const inv = allInvestments[k];
+                const listItem = document.createElement('li');
+                listItem.className = 'investment-item';
+                listItem.innerHTML = `
+                    <div class="n-content">
+                        <span class="n-date">${inv.date}</span>
+                        <div class="n-text">${inv.text}</div>
+                    </div>
+                    <div class="n-delete" onclick="deleteInvestment('${k}')" title="মুছে ফেলুন">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>`;
+                list.appendChild(listItem);
+            });
+            container.appendChild(list);
         }
 
         window.onload = loadData;
