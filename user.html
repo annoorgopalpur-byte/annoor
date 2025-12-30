@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Kalpurush:wght@400;500;600;700&family=Tiro+Bangla&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+<link rel="manifest" href="manifest.json">
     <style>
         :root {
             --header-bg: #e0f7fa; 
@@ -351,6 +351,14 @@
     function openProfileModal() { alert("তথ্য পরিবর্তনের জন্য এডমিনের সাথে যোগাযোগ করুন।"); }
     function openNoticeModal() { alert("শুধুমাত্র এডমিন নোটিশ দিতে পারবেন।"); }
     </script>
-
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/annoor/sw.js')
+                .then(reg => console.log('Service worker registered.'))
+                .catch(err => console.log('Service worker registration failed: ', err));
+        });
+    }
+</script>
 </body>
 </html>
