@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>এডমিন কন্ট্রোল - আন্-নূর খিদমাহ্</title>
+    <!-- ফন্ট লোড -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --header-bg: #e0f7fa; 
+            --header-border: #ff0000;
+            --primary-blue: #0056b3;
+            --pill-gray: #9e9e9e;
+            --bg-color: #f1f5f9;
+            --text-dark: #333;
+            --card-bg: #ffffff;
+            --secondary-teal: #00897b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            padding-bottom: 30px;
+        }
+
+        /* --- হেডার --- */
+        .header {
+            background-color: var(--header-bg);
+            padding: 15px 5px 8px; 
+            border-bottom: 5px solid var(--header-border); 
+            border-bottom-left-radius: 35px;
+            border-bottom-right-radius: 35px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden; 
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 5px;
+            flex-wrap: nowrap;
+            width: 100%;
+            padding: 0 5px;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-blue);
+            object-fit: cover;
+            background: white;
+            flex-shrink: 0;
+        }
+
+        .header-texts {
+            text-align: left;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .org-name-bn {
+            font-family: 'Tiro Bangla', serif !important; 
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+            line-height: 1.1;
+            white-space: nowrap;
+        }
+
+        .org-name-en {
+            font-family: 'Baloo Da 2', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .address-pill {
+            background-color: var(--pill-gray);
+            color: white;
+            display: inline-block;
+            padding: 3px 15px;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 5px 0 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: black;
+            font-weight: 500;
+            font-family: 'Tiro Bangla', serif; 
+        }
+
+        @media (max-width: 480px) {
+            .logo-img { width: 65px; height: 65px; }
+            .org-name-bn { font-size: 5.8vw; }
+            .org-name-en { font-size: 3.8vw; } 
+        }
+
+        /* --- এডমিন কন্টেন্ট --- */
+        .admin-label {
+            text-align: center;
+            margin: 15px 0 10px;
+            font-weight: 800;
+            color: #d32f2f;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            padding: 0 15px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- কন্ট্রোল বাটন গ্রুপ --- */
+        .top-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-ctrl {
+            border: none;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+            color: white;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        .btn-ctrl:active { transform: scale(0.96); }
+
+        .btn-notice { background: #673ab7; }
+        .btn-add-mem { background: #2e7d32; }
+        .btn-chat { background: #007bff; }
+
+        .search-box {
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        /* --- ড্যাশবোর্ড গ্রিড --- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .dash-card {
+            background: white;
+            padding: 15px 12px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .dash-card:active { transform: scale(0.98); }
+
+        .c-deposit { border-left: 5px solid #2e7d32; }
+        .c-loan { border-left: 5px solid #d32f2f; }
+        .c-welfare { border-left: 5px solid #0288d1; cursor: pointer; }
+        .c-expense { border-left: 5px solid #f57c00; cursor: pointer; }
+
+        .dash-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .bg-deposit { background: #e8f5e9; color: #2e7d32; }
+        .bg-loan { background: #ffebee; color: #d32f2f; }
+        .bg-welfare { background: #e1f5fe; color: #0288d1; }
+        .bg-expense { background: #fff3e0; color: #f57c00; }
+
+        .d-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .d-title { font-size: 0.8rem; color: #666; font-weight: 600; white-space: nowrap;}
+        .d-value { font-size: 1.1rem; color: #333; font-weight: 800; font-family: 'Baloo Da 2', sans-serif;}
+        .edit-hint { position: absolute; top: 5px; right: 5px; font-size: 0.6rem; color: #aaa; }
+
+        /* --- মেম্বার লিস্ট --- */
+        .member-list-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .list-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 12px 20px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .member-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .member-item:active { background: #f5f5f5; }
+
+        .m-name { font-weight: 700; color: #333; font-size: 1.1rem; display: block; }
+        .m-id { font-size: 0.85rem; color: #777; }
+        .status-badge { font-size: 0.75rem; padding: 4px 10px; border-radius: 10px; font-weight: 700; }
+        .active { background: #e8f5e9; color: #2e7d32; }
+        .inactive { background: #ffebee; color: #c62828; }
+
+        /* --- মডাল --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-content {
+            background: white;
+            width: 92%;
+            max-width: 550px;
+            margin: 20px auto;
+            border-radius: 20px;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* --- চ্যাট ড্যাশবোর্ড স্টাইল --- */
+        .chat-container {
+            display: flex;
+            height: 500px;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .chat-users-list {
+            width: 35%;
+            background: #f8fafc;
+            border-right: 1px solid #eee;
+            overflow-y: auto;
+        }
+
+        .chat-box-area {
+            width: 65%;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+        }
+
+        .chat-user-item {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .chat-user-item.active { background: #e3f2fd; border-left: 4px solid #007bff; }
+        .chat-user-item .u-name { font-weight: bold; display: block; }
+        .chat-user-item .u-id { font-size: 0.75rem; color: #777; }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #f1f5f9;
+        }
+
+        .msg {
+            max-width: 80%;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            position: relative;
+        }
+        .msg-user { align-self: flex-start; background: white; color: #333; border-bottom-left-radius: 2px; }
+        .msg-admin { align-self: flex-end; background: #007bff; color: white; border-bottom-right-radius: 2px; }
+        .msg-time { font-size: 0.65rem; display: block; margin-top: 4px; opacity: 0.7; }
+
+        .chat-input-group {
+            padding: 10px;
+            display: flex;
+            gap: 8px;
+            border-top: 1px solid #eee;
+        }
+        .chat-input-group input { margin-bottom: 0; flex: 1; }
+        .btn-send { background: #007bff; color: white; border: none; padding: 0 15px; border-radius: 8px; cursor: pointer; }
+
+        @media (max-width: 500px) {
+            .chat-container { flex-direction: column; height: 600px; }
+            .chat-users-list { width: 100%; height: 150px; }
+            .chat-box-area { width: 100%; height: 450px; }
+        }
+
+        .grid-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        h4 { margin: 15px 0 10px; color: var(--primary-blue); border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+        
+        textarea { resize: vertical; min-height: 80px; }
+
+        .btn-save {
+            background: var(--secondary-teal);
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #999; }
+
+        .notice-list {
+            list-style: none;
+            margin-top: 15px;
+            max-height: 250px;
+            overflow-y: auto;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        .notice-item {
+            background: #f8fafc;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-left: 4px solid #673ab7;
+        }
+        .n-content { flex: 1; margin-right: 10px; }
+        .n-date { display: block; font-size: 0.75rem; color: #888; margin-bottom: 3px; }
+        .n-text { font-size: 0.95rem; color: #333; line-height: 1.3; font-family: 'Tiro Bangla', serif; }
+        .n-delete { 
+            color: #ef4444; 
+            background: #fee2e2; 
+            width: 30px; height: 30px; 
+            border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; 
+            cursor: pointer; font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 400px) { .grid-inputs { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <!-- হেডার -->
+    <header class="header">
+        <div class="header-content">
+            <img src="An.png" alt="Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2913/2913465.png'">
+            <div class="header-texts">
+                <div class="org-name-bn">আন্-নূর খিদমাহ্ ফাউন্ডেশন</div>
+                <div class="org-name-en">An-Noor Khidmah Foundation</div>
+            </div>
+        </div>
+        <div class="address-pill">গোপালপুর, টাঙ্গাইল। স্থাপিত : ২০২৪ ইং</div>
+        <div class="tagline">অরাজনৈতিক, সঞ্চয় ও সেবামূলক সংগঠন</div>
+    </header>
+
+    <div class="admin-label"><i class="fas fa-tools"></i> Admin Control Panel</div>
+
+    <div class="container">
+        <!-- কন্ট্রোল বাটন গ্রুপ -->
+        <div class="top-controls">
+            <button class="btn-ctrl btn-notice" onclick="openNoticeModal()">
+                <i class="fas fa-bullhorn"></i> নোটিশ
+            </button>
+            <button class="btn-ctrl btn-add-mem" onclick="openAddMemberModal()">
+                <i class="fas fa-user-plus"></i> সদস্য যোগ
+            </button>
+            <button class="btn-ctrl btn-chat" onclick="openChatModal()">
+                <i class="fas fa-comments"></i> চ্যাট বক্স
+            </button>
+        </div>
+
+        <!-- সার্চ -->
+        <div class="search-box">
+            <i class="fas fa-search" style="color:#aaa;"></i>
+            <input type="text" id="searchInput" placeholder="সদস্যের নাম বা সদস্য নং দিয়ে খুঁজুন..." onkeyup="filterMembers()">
+        </div>
+
+        <!-- ড্যাশবোর্ড -->
+        <div class="dashboard-grid">
+            <div class="dash-card c-deposit">
+                <div class="dash-icon bg-deposit"><i class="fas fa-coins"></i></div>
+                <div class="d-info">
+                    <span class="d-title">মোট জমা</span>
+                    <span class="d-value">৳ <span id="dash-total-deposit">0</span></span>
+                </div>
+            </div>
+            <div class="dash-card c-loan">
+                <div class="dash-icon bg-loan"><i class="fas fa-hand-holding-usd"></i></div>
+                <div class="d-info">
+                    <span class="d-title">মোট ঋণ প্রদান</span>
+                    <span class="d-value">৳ <span id="dash-total-loan">0</span></span>
+                </div>
+            </div>
+            <!-- কল্যাণ তহবিল কার্ড -->
+            <div class="dash-card c-welfare" onclick="updateOrgStat('welfare', 'কল্যাণ তহবিল')">
+                <i class="fas fa-edit edit-hint"></i>
+                <div class="dash-icon bg-welfare"><i class="fas fa-hand-holding-heart"></i></div>
+                <div class="d-info">
+                    <span class="d-title">কল্যাণ তহবিল</span>
+                    <span class="d-value">৳ <span id="dash-welfare">0</span></span>
+                </div>
+            </div>
+            <!-- মোট খরচ কার্ড -->
+            <div class="dash-card c-expense" onclick="updateOrgStat('expense', 'মোট খরচ')">
+                <i class="fas fa-edit edit-hint"></i>
+                <div class="dash-icon bg-expense"><i class="fas fa-file-invoice-dollar"></i></div>
+                <div class="d-info">
+                    <span class="d-title">মোট খরচ</span>
+                    <span class="d-value">৳ <span id="dash-expense">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- সদস্য তালিকা -->
+        <div class="member-list-card">
+            <div class="list-header">
+                <span>সদস্যদের তালিকা</span>
+                <span id="memberCount">...</span>
+            </div>
+            <div id="memberContainer">
+                <p style="text-align:center; padding: 20px; color:#888;">লোড হচ্ছে...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- মডালসমূহ (এডিট, নতুন মেম্বার, নোটিশ, চ্যাট) -->
+    <!-- (আগের মতোই থাকবে সব HTML মডাল) -->
+
+    <!-- এডিট মডাল -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('editModal')">&times;</span>
+            <h2 id="modalTitle" style="margin-bottom:10px;">এডিট করুন</h2>
+            <form id="editForm">
+                <h4><i class="fas fa-user-circle"></i> প্রোফাইল তথ্য</h4>
+                <div class="grid-inputs">
+                    <div><label>নাম</label><input type="text" id="p-name"></div>
+                    <div><label>সদস্য নং</label><input type="text" id="p-memNo"></div>
+                    <div><label>শেয়ার সংখ্যা</label><input type="text" id="p-share"></div>
+                    <div><label>মাসিক জমা</label><input type="text" id="p-oneShare"></div>
+                    <div><label>নমিনি</label><input type="text" id="p-nominee"></div>
+                    <div><label>রক্তের গ্রুপ</label><input type="text" id="p-bg"></div>
+                </div>
+                <label>ঠিকানা</label><input type="text" id="p-address">
+                <h4><i class="fas fa-money-check-alt"></i> হিসাব তথ্য</h4>
+                <div class="grid-inputs">
+                    <div><label>মোট জমা</label><input type="number" id="s-total"></div>
+                    <div><label>সর্বশেষ জমা</label><input type="number" id="s-last"></div>
+                    <div><label>জমার তারিখ</label><input type="text" id="s-date"></div>
+                    <div><label>বকেয়া</label><input type="number" id="s-due"></div>
+                    <div><label>মোট লভ্যাংশ</label><input type="number" id="s-pTotal"></div>
+                    <div><label>বাৎসরিক লভ্যাংশ</label><input type="number" id="s-pYear"></div>
+                    <div><label>ঋণ</label><input type="number" id="s-loan"></div>
+                    <div>
+                        <label style="color:red; font-weight:bold;">অ্যাকাউন্ট স্ট্যাটাস</label>
+                        <select id="s-status">
+                            <option value="active">Active (চালু)</option>
+                            <option value="inactive">Inactive (বন্ধ)</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" class="btn-save" onclick="saveData()">তথ্য আপডেট করুন</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- নতুন সদস্য মডাল -->
+    <div id="addMemberModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('addMemberModal')">&times;</span>
+            <h2 style="margin-bottom:15px; color:var(--secondary-teal);"><i class="fas fa-user-plus"></i> নতুন সদস্য ফরম</h2>
+            <label>মেম্বার আইডি <span style="color:red">*</span></label>
+            <input type="number" id="new-id" placeholder="যেমন: 101">
+            <label>সদস্যের নাম <span style="color:red">*</span></label>
+            <input type="text" id="new-name" placeholder="পুরো নাম">
+            <label>সদস্য নং</label>
+            <input type="text" id="new-memNo" placeholder="যেমন: M-01">
+            <button class="btn-save" onclick="createMember()">অ্যাকাউন্ট তৈরি করুন</button>
+        </div>
+    </div>
+
+    <!-- নোটিশ মডাল -->
+    <div id="noticeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('noticeModal')">&times;</span>
+            <h2 style="margin-bottom:15px; color:#673ab7;"><i class="fas fa-bullhorn"></i> নোটিশ বোর্ড</h2>
+            <textarea id="newNoticeText" placeholder="নতুন নোটিশ এখানে লিখুন..." rows="3"></textarea>
+            <button class="btn-save" style="background:#673ab7; margin-bottom:15px;" onclick="addNotice()">প্রকাশ করুন</button>
+            <h4 style="margin:0; border:none; font-size:0.9rem;">পুরাতন নোটিশসমূহ:</h4>
+            <ul class="notice-list" id="adminNoticeList"></ul>
+        </div>
+    </div>
+
+    <!-- চ্যাট ড্যাশবোর্ড মডাল -->
+    <div id="chatModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="close-btn" onclick="closeModal('chatModal')">&times;</span>
+            <h2 style="margin-bottom:15px; color:#007bff;"><i class="fas fa-comments"></i> চ্যাট ড্যাশবোর্ড</h2>
+            <div class="chat-container">
+                <div class="chat-users-list" id="chatUserList"></div>
+                <div class="chat-box-area">
+                    <div id="activeChatHeader" style="padding:10px; border-bottom:1px solid #eee; font-weight:bold; color:#0056b3;">সদস্য নির্বাচন করুন</div>
+                    <div class="chat-messages" id="chatMessages"></div>
+                    <div class="chat-input-group">
+                        <input type="text" id="adminMsgInput" placeholder="মেসেজ লিখুন..." onkeypress="handleChatKey(event)">
+                        <button class="btn-send" onclick="sendAdminMessage()"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ফায়ারবেজ -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+    <script>
+     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBkRUcyisQYgIScMknjRNKqrmCLpZUd3yU",
+  authDomain: "annoor-foundation.firebaseapp.com",
+  projectId: "annoor-foundation",
+  storageBucket: "annoor-foundation.firebasestorage.app",
+  messagingSenderId: "823540670524",
+  appId: "1:823540670524:web:7ff8f0bfaca7e81d67a339",
+  measurementId: "G-PRC8XZGVPW"
+};
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        let allMembers = {};
+        let currentEditID = "";
+        let allNotices = {};
+        let activeChatUserId = "";
+
+        // ডাটা লোড
+        function loadData() {
+            db.ref('users').on('value', (snapshot) => {
+                allMembers = snapshot.val() || {};
+                renderList(allMembers);
+                calculateDashboard(allMembers);
+            });
+            
+            // অর্গ স্ট্যাট লোড (Welfare and Expense)
+            db.ref('org_stats').on('value', (snapshot) => {
+                const stats = snapshot.val() || { welfare: 0, expense: 0 };
+                document.getElementById('dash-welfare').innerText = Number(stats.welfare || 0).toLocaleString('en-US');
+                document.getElementById('dash-expense').innerText = Number(stats.expense || 0).toLocaleString('en-US');
+            });
+
+            db.ref('notices').on('value', (snapshot) => {
+                allNotices = snapshot.val() || {};
+                renderAdminNotices();
+            });
+        }
+
+        // --- কল্যাণ তহবিল ও খরচ আপডেট ফাংশন (FIXED) ---
+        function updateOrgStat(key, label) {
+            // বর্তমান ভ্যালু নেওয়া (কমা সরিয়ে)
+            const targetId = (key === 'welfare') ? 'dash-welfare' : 'dash-expense';
+            const currentVal = document.getElementById(targetId).innerText.replace(/,/g, '');
+            
+            const newVal = prompt(`${label} এর নতুন পরিমাণ লিখুন:`, currentVal);
+            
+            // যদি ইউজার ক্যান্সেল না করে এবং ভ্যালু দেয়
+            if (newVal !== null && newVal.trim() !== "") {
+                const numericValue = Number(newVal);
+                
+                if (!isNaN(numericValue)) {
+                    // ফায়ারবেজে সেভ করা
+                    db.ref('org_stats/' + key).set(numericValue)
+                    .then(() => {
+                        console.log(label + " আপডেট সফল!");
+                    })
+                    .catch((error) => {
+                        alert("ত্রুটি: " + error.message);
+                    });
+                } else {
+                    alert("দয়া করে সঠিক সংখ্যা লিখুন।");
+                }
+            }
+        }
+
+        // --- ড্যাশবোর্ড হিসাব ---
+        function calculateDashboard(members) {
+            let totalDeposit = 0, totalLoan = 0;
+            Object.values(members).forEach(m => {
+                if(m.stats) {
+                    totalDeposit += Number(m.stats.total || 0);
+                    totalLoan += Number(m.stats.loan || 0);
+                }
+            });
+            document.getElementById('dash-total-deposit').innerText = totalDeposit.toLocaleString('en-US');
+            document.getElementById('dash-total-loan').innerText = totalLoan.toLocaleString('en-US');
+        }
+
+        // --- মেম্বার লিস্ট রেন্ডার ---
+        function renderList(members) {
+            const container = document.getElementById('memberContainer');
+            container.innerHTML = '';
+            const keys = Object.keys(members);
+            document.getElementById('memberCount').innerText = keys.length + " জন";
+
+            keys.forEach(id => {
+                const m = members[id];
+                const statusCls = m.status === 'active' ? 'active' : 'inactive';
+                container.innerHTML += `
+                    <div class="member-item" onclick="openEditModal('${id}')">
+                        <div>
+                            <span class="m-name">${m.profile.name}</span>
+                            <span class="m-id">আইডি: ${id} | নং: ${m.profile.memNo}</span>
+                        </div>
+                        <span class="status-badge ${statusCls}">${m.status}</span>
+                    </div>`;
+            });
+        }
+
+        // --- সার্চ ফিল্টার ---
+        function filterMembers() {
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = {};
+            Object.keys(allMembers).forEach(id => {
+                const m = allMembers[id];
+                if(id.includes(term) || m.profile.name.toLowerCase().includes(term)) filtered[id] = m;
+            });
+            renderList(filtered);
+        }
+
+        // --- চ্যাট ফাংশন ---
+        function openChatModal() {
+            document.getElementById('chatModal').style.display = 'block';
+            loadChatUsers();
+        }
+
+        function loadChatUsers() {
+            db.ref('chats').on('value', (snapshot) => {
+                const chatData = snapshot.val() || {};
+                const listDiv = document.getElementById('chatUserList');
+                listDiv.innerHTML = '';
+                Object.keys(chatData).forEach(uid => {
+                    const userName = allMembers[uid] ? allMembers[uid].profile.name : "অজানা";
+                    const activeCls = (uid === activeChatUserId) ? 'active' : '';
+                    listDiv.innerHTML += `<div class="chat-user-item ${activeCls}" onclick="selectConversation('${uid}', '${userName}')">
+                        <span class="u-name">${userName}</span><span class="u-id">আইডি: ${uid}</span></div>`;
+                });
+            });
+        }
+
+        function selectConversation(uid, name) {
+            activeChatUserId = uid;
+            document.getElementById('activeChatHeader').innerText = "চ্যাট: " + name;
+            db.ref('chats/' + uid).on('value', (snapshot) => {
+                const messages = snapshot.val() || {};
+                const msgDiv = document.getElementById('chatMessages');
+                msgDiv.innerHTML = '';
+                Object.values(messages).forEach(m => {
+                    const typeCls = m.sender === 'admin' ? 'msg-admin' : 'msg-user';
+                    msgDiv.innerHTML += `<div class="msg ${typeCls}">${m.text}<span class="msg-time">${m.time || ''}</span></div>`;
+                });
+                msgDiv.scrollTop = msgDiv.scrollHeight;
+            });
+        }
+
+        function handleChatKey(e) { if(e.key === 'Enter') sendAdminMessage(); }
+        function sendAdminMessage() {
+            const text = document.getElementById('adminMsgInput').value.trim();
+            if(!activeChatUserId || !text) return;
+            db.ref('chats/' + activeChatUserId).push({
+                sender: 'admin', text: text,
+                time: new Date().toLocaleTimeString('bn-BD', {hour: '2-digit', minute:'2-digit'})
+            }).then(() => { document.getElementById('adminMsgInput').value = ''; });
+        }
+
+        // --- মেম্বার ডাটা সেভ এবং মডাল ক্লোজ ---
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function openEditModal(id) {
+            currentEditID = id;
+            const m = allMembers[id];
+            document.getElementById('modalTitle').innerText = "এডিট আইডি: " + id;
+            document.getElementById('p-name').value = m.profile.name;
+            document.getElementById('p-memNo').value = m.profile.memNo;
+            document.getElementById('p-share').value = m.profile.share;
+            document.getElementById('p-oneShare').value = m.profile.oneShare;
+            document.getElementById('p-nominee').value = m.profile.nominee;
+            document.getElementById('p-address').value = m.profile.address;
+            document.getElementById('p-bg').value = m.profile.bg;
+            document.getElementById('s-total').value = m.stats.total;
+            document.getElementById('s-last').value = m.stats.last;
+            document.getElementById('s-date').value = m.stats.lastDate;
+            document.getElementById('s-due').value = m.stats.due;
+            document.getElementById('s-pTotal').value = m.stats.profitTotal;
+            document.getElementById('s-pYear').value = m.stats.profitYear;
+            document.getElementById('s-loan').value = m.stats.loan;
+            document.getElementById('s-status').value = m.status || 'active';
+            document.getElementById('editModal').style.display = 'block';
+        }
+
+        function saveData() {
+            const updated = {
+                profile: {
+                    name: document.getElementById('p-name').value,
+                    memNo: document.getElementById('p-memNo').value,
+                    share: document.getElementById('p-share').value,
+                    oneShare: document.getElementById('p-oneShare').value,
+                    nominee: document.getElementById('p-nominee').value,
+                    address: document.getElementById('p-address').value,
+                    bg: document.getElementById('p-bg').value
+                },
+                stats: {
+                    total: Number(document.getElementById('s-total').value),
+                    last: Number(document.getElementById('s-last').value),
+                    lastDate: document.getElementById('s-date').value,
+                    due: Number(document.getElementById('s-due').value),
+                    profitTotal: Number(document.getElementById('s-pTotal').value),
+                    profitYear: Number(document.getElementById('s-pYear').value),
+                    loan: Number(document.getElementById('s-loan').value)
+                },
+                status: document.getElementById('s-status').value
+            };
+            db.ref('users/' + currentEditID).update(updated).then(() => {
+                alert("সেভ হয়েছে!");
+                closeModal('editModal');
+            });
+        }
+
+        function openAddMemberModal() { document.getElementById('addMemberModal').style.display = 'block'; }
+        function createMember() {
+            const id = document.getElementById('new-id').value.trim();
+            const name = document.getElementById('new-name').value.trim();
+            const memNo = document.getElementById('new-memNo').value.trim();
+            if (!id || !name) return;
+            db.ref('users/' + id).set({
+                profile: { name: name, memNo: memNo, share: '0', oneShare: '0', nominee: '', address: '', bg: '' },
+                stats: { total: 0, last: 0, lastDate: '', due: 0, loan: 0, profitTotal: 0, profitYear: 0 },
+                status: 'active'
+            }).then(() => { closeModal('addMemberModal'); });
+        }
+
+        function openNoticeModal() { document.getElementById('noticeModal').style.display = 'block'; }
+        function addNotice() {
+            const text = document.getElementById('newNoticeText').value.trim();
+            if(!text) return;
+            db.ref('notices').push({ text: text, date: new Date().toLocaleDateString('bn-BD') })
+            .then(() => { document.getElementById('newNoticeText').value = ''; });
+        }
+        function deleteNotice(k) { if(confirm("মুছবেন?")) db.ref('notices/' + k).remove(); }
+        function renderAdminNotices() {
+            const list = document.getElementById('adminNoticeList');
+            list.innerHTML = '';
+            Object.keys(allNotices).reverse().forEach(k => {
+                const n = allNotices[k];
+                list.innerHTML += `<li class="notice-item"><div class="n-content"><span class="n-date">${n.date}</span><div class="n-text">${n.text}</div></div>
+                    <div class="n-delete" onclick="deleteNotice('${k}')"><i class="fas fa-trash-alt"></i></div></li>`;
+            });
+        }
+
+        window.onload = loadData;
+    </script>
+</body>
+</html>

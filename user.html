@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আন্-নূর খিদমাহ্ ফাউন্ডেশন</title>
+    <!-- ফন্ট লোড (এখানে Kalpurush ফন্ট যোগ করা হয়েছে) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Kalpurush:wght@400;500;600;700&family=Tiro+Bangla&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --header-bg: #e0f7fa; 
+            --header-border: #ff0000;
+            --primary-blue: #0056b3;
+            --pill-gray: #9e9e9e;
+            --bg-color: #f1f5f9;
+            --text-dark: #333;
+            --card-bg: #ffffff;
+            --top-border-color: #0d47a1;
+            --chat-primary: #00897b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+           padding-bottom: 30px;
+        }
+        
+        /* --- নতুন ফন্ট ক্লাস (Kalpurush ব্যবহার করা হয়েছে) --- */
+        .bangla-font { 
+            font-family: 'Kalpurush', sans-serif !important;
+        }
+
+        /* হেডার এবং অন্যান্য CSS অপরিবর্তিত থাকবে... */
+        .header { background-color: var(--header-bg); padding: 15px 5px 8px; border-bottom: 5px solid var(--header-border); border-bottom-left-radius: 35px; border-bottom-right-radius: 35px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; }
+        .header-content { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 5px; flex-wrap: nowrap; width: 100%; padding: 0 5px; }
+        .logo-img { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--primary-blue); object-fit: cover; background: white; flex-shrink: 0; }
+        .header-texts { text-align: left; flex: 1; min-width: 0; }
+        .org-name-bn { font-family: 'Tiro Bangla', serif !important; font-size: 1.8rem; color: var(--primary-blue); font-weight: 700; line-height: 1.1; white-space: nowrap; text-shadow: 0px 0px 1px rgba(0,0,0,0.1); }
+        .org-name-en { font-family: 'Baloo Da 2', sans-serif; font-size: 1.1rem; color: var(--primary-blue); font-weight: 800; text-transform: uppercase; line-height: 1.2; white-space: nowrap; }
+        .address-pill { background-color: var(--pill-gray); color: white; display: inline-block; padding: 3px 15px; border-radius: 15px; font-size: 0.95rem; font-weight: 600; margin: 5px 0 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .tagline { font-size: 1.2rem; color: black; font-weight: 500; font-family: 'Tiro Bangla', serif; }
+        .user-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; padding: 10px 15px; max-width: 600px; margin: 0 auto; }
+        .info-card { background: var(--card-bg); padding: 8px 6px; border-radius: 12px; box-shadow: 0 1px 5px rgba(0,0,0,0.03); display: flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid #eef2f6; transition: transform 0.1s; cursor: pointer; grid-column: span 2; }
+        .info-card:active { transform: scale(0.98); }
+        .half-width { grid-column: span 3; justify-content: flex-start; padding: 8px 10px; }
+        .u-icon-box { width: 28px; height: 28px; background: #e0f2f1; color: #00897b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0; }
+        .u-details { display: flex; flex-direction: column; overflow: hidden; justify-content: center; min-width: 0; }
+        .u-label { font-size: 0.7rem; color: #777; margin-bottom: 0px; font-family: 'Tiro Bangla', serif !important; white-space: nowrap; }
+        .u-value { font-size: 0.95rem; color: #222; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3; }
+        .container { padding: 0 10px; max-width: 600px; margin: 0 auto; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
+        .card { background: white; padding: 15px 5px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.2s; position: relative; border-top: 5px solid var(--top-border-color); }
+        .card:active { transform: scale(0.96); }
+        .icon-box { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; color: white; font-size: 0.9rem; background-color: var(--theme-color); box-shadow: 0 2px 5px rgba(0,0,0,0.15); }
+        .c-total { --theme-color: #10b981; } .c-last { --theme-color: #3b82f6; } .c-due { --theme-color: #f97316; } .c-profit-total { --theme-color: #8b5cf6; } .c-profit-year { --theme-color: #eab308; } .c-loan { --theme-color: #ef4444; }
+        .card-title { font-size: 0.8rem; color: #555; margin-bottom: 3px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .card-value { font-size: 1.1rem; font-weight: 700; color: #333; line-height: 1.2; }
+        .card-sub { font-size: 0.8rem; color: #888; margin-top: 2px; font-weight: 500; }
+        .notice-section { background: white; border-radius: 20px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); margin-top: 20px; }
+        .notice-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .notice-title { color: #00897b; font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
+        .btn-new { background-color: #00897b; color: white; border: none; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; }
+        .notice-list { list-style: none; }
+        .notice-item { background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 4px solid #00897b; margin-bottom: 10px; position: relative; }
+        .n-date { color: #888; display: block; margin-bottom: 4px; font-size: 0.85rem; }
+        .n-text { font-family: 'Tiro Bangla', serif !important; font-size: 1.1rem; line-height: 1.4; color: #444; }
+        .footer { text-align: center; margin-top: 35px; padding: 20px 10px; background: #fff; border-top: 1px solid #eee; color: #555; font-size: 0.85rem; line-height: 1.8; border-radius: 20px 20px 0 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.02); font-weight: 500; }
+        .dev-name { color: var(--primary-blue); font-weight: 700; font-family: 'Baloo Da 2', cursive; font-size: 1rem; }
+        .footer-link { color: #444; text-decoration: none; font-weight: 600; }
+        .chat-float-btn { position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px; background-color: var(--chat-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 1000; transition: transform 0.2s; }
+        .chat-float-btn:active { transform: scale(0.9); }
+        .chat-window { display: none; position: fixed; bottom: 85px; right: 20px; width: 300px; height: 400px; background: white; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.15); z-index: 1000; flex-direction: column; overflow: hidden; border: 1px solid #e2e8f0; }
+        .chat-header { background: var(--chat-primary); color: white; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+        .close-chat { cursor: pointer; font-size: 1.2rem; }
+        .chat-body { flex: 1; padding: 10px; overflow-y: auto; background: #f0f2f5; display: flex; flex-direction: column; gap: 8px; }
+        .msg-bubble { max-width: 80%; padding: 8px 12px; border-radius: 12px; font-size: 0.9rem; line-height: 1.4; position: relative; word-wrap: break-word; }
+        .msg-sent { align-self: flex-end; background: #dcf8c6; color: #333; border-bottom-right-radius: 2px; }
+        .msg-received { align-self: flex-start; background: white; color: #333; border-bottom-left-radius: 2px; }
+        .chat-footer { padding: 10px; background: white; border-top: 1px solid #eee; display: flex; gap: 8px; }
+        .chat-input { flex: 1; border: 1px solid #ddd; border-radius: 20px; padding: 8px 15px; outline: none; font-size: 0.95rem; }
+        .chat-send-btn { background: var(--chat-primary); color: white; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        @media (max-width: 480px) {
+            .logo-img { width: 65px; height: 65px; } .org-name-bn { font-size: 5.8vw; } .org-name-en { font-size: 3.8vw; } .header { padding: 15px 0px 8px; }
+        }
+        @media (max-width: 380px) {
+            .u-icon-box { width: 24px; height: 24px; font-size: 0.7rem; } .half-width { gap: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- হেডার -->
+    <header class="header">
+        <div class="header-content">
+            <img src="An.png" alt="Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2913/2913465.png'">
+            <div class="header-texts">
+                <div class="org-name-bn">আন্-নূর খিদমাহ্ ফাউন্ডেশন</div>
+                <div class="org-name-en">An-Noor Khidmah Foundation</div>
+            </div>
+        </div>
+        <div class="address-pill bangla-font">গোপালপুর, টাঙ্গাইল। স্থাপিত : ২০২৪ ইং</div>
+        <div class="tagline">অরাজনৈতিক, সঞ্চয় ও সেবামূলক সংগঠন</div>
+    </header>
+
+    <!-- ইউজার ইনফো (bangla-font ক্লাস যোগ করা হয়েছে) -->
+    <div class="user-grid" onclick="openProfileModal()" title="তথ্য পরিবর্তন করতে ক্লিক করুন">
+        <div class="info-card">
+            <div class="u-icon-box"><i class="fas fa-id-card-clip"></i></div>
+            <div class="u-details"><span class="u-label">সদস্য নং</span><span class="u-value bangla-font" id="display-memNo">...</span></div>
+        </div>
+        <div class="info-card">
+            <div class="u-icon-box"><i class="fas fa-chart-pie"></i></div>
+            <div class="u-details"><span class="u-label">শেয়ার সংখ্যা</span><span class="u-value bangla-font" id="display-share">...</span></div>
+        </div>
+        <div class="info-card">
+            <div class="u-icon-box"><i class="fas fa-coins"></i></div>
+            <div class="u-details"><span class="u-label">মাসিক জমা</span><span class="u-value bangla-font" id="display-oneShare">...</span></div>
+        </div>
+        <div class="info-card half-width">
+            <div class="u-icon-box"><i class="fas fa-user"></i></div>
+            <div class="u-details"><span class="u-label">সদস্যের নাম</span><span class="u-value" id="display-name">লোড হচ্ছে...</span></div>
+        </div>
+        <div class="info-card half-width">
+            <div class="u-icon-box"><i class="fas fa-user-shield"></i></div>
+            <div class="u-details"><span class="u-label">নমিনি</span><span class="u-value" id="display-nominee">...</span></div>
+        </div>
+        <div class="info-card half-width">
+            <div class="u-icon-box"><i class="fas fa-map-location-dot"></i></div>
+            <div class="u-details"><span class="u-label">ঠিকানা</span><span class="u-value" id="display-address">...</span></div>
+        </div>
+        <div class="info-card half-width">
+            <div class="u-icon-box"><i class="fas fa-droplet" style="color:#e53935;"></i></div>
+            <div class="u-details"><span class="u-label">রক্তের গ্রুপ</span><span class="u-value bangla-font" id="display-bg">...</span></div>
+        </div>
+    </div>
+
+    <!-- মেইন কন্টেন্ট (bangla-font ক্লাস যোগ করা হয়েছে) -->
+    <div class="container">
+        <div class="stats-grid">
+            <div class="card c-total" onclick="openEditModal('total')">
+                <div class="icon-box"><i class="fas fa-wallet"></i></div>
+                <div class="card-title">আপনার হিসাব</div>
+                <div class="card-value bangla-font">৳ <span id="val-total">0</span></div>
+            </div>
+            <div class="card c-last" onclick="openEditModal('last')">
+                <div class="icon-box"><i class="fas fa-calendar-day"></i></div>
+                <div class="card-title">সর্বশেষ জমা</div>
+                <div class="card-value bangla-font">৳ <span id="val-last">0</span></div>
+                <div class="card-sub bangla-font" id="val-last-date">তারিখ নেই</div>
+            </div>
+            <div class="card c-due" onclick="openEditModal('due')">
+                <div class="icon-box"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="card-title">বকেয়া</div>
+                <div class="card-value bangla-font">৳ <span id="val-due">0</span></div>
+            </div>
+            <div class="card c-profit-total" onclick="openEditModal('profitTotal')">
+                <div class="icon-box"><i class="fas fa-chart-line"></i></div>
+                <div class="card-title">মোট লভ্যাংশ</div>
+                <div class="card-value bangla-font">৳ <span id="val-profit-total">0</span></div>
+            </div>
+            <div class="card c-profit-year" onclick="openEditModal('profitYear')">
+                <div class="icon-box"><i class="fas fa-sack-dollar"></i></div>
+                <div class="card-title">বাৎসরিক লভ্যাংশ</div>
+                <div class="card-value bangla-font">৳ <span id="val-profit-year">0</span></div>
+            </div>
+            <div class="card c-loan" onclick="openEditModal('loan')">
+                <div class="icon-box"><i class="fas fa-hand-holding-hand"></i></div>
+                <div class="card-title">ঋণ</div>
+                <div class="card-value bangla-font">৳ <span id="val-loan">0</span></div>
+            </div>
+        </div>
+
+        <!-- নোটিশ বোর্ড -->
+        <div class="notice-section">
+            <div class="notice-header">
+                <div class="notice-title"><i class="fas fa-bullhorn"></i> নোটিশ বোর্ড</div>
+                <button class="btn-new" onclick="openNoticeModal()">নতুন</button>
+            </div>
+            <ul class="notice-list" id="notice-list"></ul>
+        </div>
+
+        <!-- ফুটার সেকশন -->
+        <footer class="footer">
+            <div>App Developed by : <span class="dev-name">মুহাঃ আব্দুর রহমান</span></div>
+            <div>E-mail: <span class="footer-link">www.hmarahman24@gmail.com</span></div>
+            <div class="bangla-font">Contact: <span class="footer-link">01763-442258</span></div>
+        </footer>
+    </div>
+
+    <!-- চ্যাট এবং মডাল (অপরিবর্তিত) -->
+    <div class="chat-float-btn" onclick="toggleChat()"><i class="fas fa-comments"></i></div>
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header"><span><i class="fas fa-user-shield"></i> এডমিন</span><span class="close-chat" onclick="toggleChat()"><i class="fas fa-times"></i></span></div>
+        <div class="chat-body" id="chatBody"><div class="msg-bubble msg-received">আসসালামু আলাইকুম, আমি এডমিন। আপনাকে কিভাবে সহযোগিতা করতে পারি?</div></div>
+        <div class="chat-footer"><input type="text" class="chat-input" id="chatInput" placeholder="মেসেজ লিখুন..." onkeypress="handleEnter(event)"><button class="chat-send-btn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button></div>
+    </div>
+    
+    <!-- ফায়ারবেজ লাইব্রেরি -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+    <script>
+    // ফায়ারবেজ কনফিগারেশন
+    const firebaseConfig = {
+      apiKey: "AIzaSyBkRUcyisQYgIScMknjRNKqrmCLpZUd3yU",
+      authDomain: "annoor-foundation.firebaseapp.com",
+      projectId: "annoor-foundation",
+      storageBucket: "annoor-foundation.firebasestorage.app",
+      messagingSenderId: "823540670524",
+      appId: "1:823540670524:web:7ff8f0bfaca7e81d67a339",
+      measurementId: "G-PRC8XZGVPW"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    let currentMemberID = '';
+    let data = {
+        profile: {},
+        stats: {},
+        notices: [],
+        chatHistory: []
+    };
+
+    window.onload = function() {
+        let memberID = localStorage.getItem('memberID');
+        if (!memberID) {
+            memberID = prompt("আপনার সদস্য আইডি লিখুন (যেমন: 101):");
+        }
+        if (memberID) {
+            currentMemberID = memberID;
+            localStorage.setItem('memberID', memberID);
+            loadAllData(memberID);
+        } else {
+            alert("আইডি ছাড়া অ্যাপটি ব্যবহার করা যাবে না।");
+        }
+    };
+
+    function loadAllData(memberID) {
+        db.ref('users/' + memberID).on('value', (snapshot) => {
+            const userData = snapshot.val();
+            if (userData) {
+                if (userData.status === "inactive") {
+                    document.body.innerHTML = "<div style='text-align:center; padding: 50px; font-family:sans-serif;'><h2 style='color:red;'>দুঃখিত, আপনার অ্যাকাউন্টটি বন্ধ আছে।</h2><p>এডমিনের সাথে যোগাযোগ করুন।</p></div>";
+                    return;
+                }
+                data.profile = userData.profile || {};
+                data.stats = userData.stats || {};
+                renderAll(); 
+            } else {
+                alert("ভুল আইডি! সঠিক আইডি দিয়ে আবার চেষ্টা করুন।");
+                localStorage.removeItem('memberID');
+                location.reload();
+            }
+        });
+
+        db.ref('notices').on('value', (snapshot) => {
+            const noticesObj = snapshot.val() || {};
+            data.notices = Object.values(noticesObj).reverse();
+            renderAll();
+        });
+
+        db.ref('chats/' + memberID).on('value', (snapshot) => {
+            const chatData = snapshot.val() || {};
+            data.chatHistory = Object.values(chatData);
+            renderChat();
+        });
+    }
+
+    function renderAll() {
+        document.getElementById('display-name').innerText = data.profile.name || 'N/A';
+        document.getElementById('display-memNo').innerText = data.profile.memNo || 'N/A';
+        document.getElementById('display-share').innerText = data.profile.share || 'N/A';
+        document.getElementById('display-oneShare').innerText = data.profile.oneShare || 'N/A';
+        document.getElementById('display-nominee').innerText = data.profile.nominee || 'N/A';
+        document.getElementById('display-address').innerText = data.profile.address || 'N/A';
+        document.getElementById('display-bg').innerText = data.profile.bg || 'N/A';
+
+        document.getElementById('val-total').innerText = e2b(data.stats.total || 0);
+        document.getElementById('val-last').innerText = e2b(data.stats.last || 0);
+        document.getElementById('val-last-date').innerText = data.stats.lastDate || 'তারিখ নেই';
+        document.getElementById('val-due').innerText = e2b(data.stats.due || 0);
+        document.getElementById('val-loan').innerText = e2b(data.stats.loan || 0);
+        document.getElementById('val-profit-total').innerText = e2b(data.stats.profitTotal || 0);
+        document.getElementById('val-profit-year').innerText = e2b(data.stats.profitYear || 0);
+
+        const list = document.getElementById('notice-list');
+        list.innerHTML = '';
+        if (data.notices.length > 0) {
+            data.notices.forEach((n) => {
+                if (n && n.date && n.text) {
+                    // এখানে নোটিশের তারিখেও bangla-font ক্লাস যোগ করা হয়েছে
+                    list.innerHTML += `
+                        <li class="notice-item">
+                            <span class="n-date bangla-font"><i class="far fa-clock"></i> ${n.date}</span>
+                            <div class="n-text">${n.text}</div>
+                        </li>`;
+                }
+            });
+        }
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('chatInput');
+        const msgText = input.value.trim();
+        if(msgText && currentMemberID) {
+            const message = { sender: 'user', text: msgText, timestamp: Date.now() };
+            db.ref('chats/' + currentMemberID).push(message);
+            input.value = '';
+        }
+    }
+
+    function renderChat() {
+        const chatBody = document.getElementById('chatBody');
+        let html = '<div class="msg-bubble msg-received">আসসালামু আলাইকুম। কিভাবে সহযোগিতা করতে পারি?</div>';
+        const sorted = data.chatHistory.sort((a, b) => a.timestamp - b.timestamp);
+        sorted.forEach(msg => {
+            const cls = msg.sender === 'user' ? 'msg-sent' : 'msg-received';
+            if (msg && msg.text) {
+               html += `<div class="msg-bubble ${cls}">${msg.text}</div>`;
+            }
+        });
+        chatBody.innerHTML = html;
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function e2b(num) {
+        return (Number(num) || 0).toLocaleString('bn-BD');
+    }
+    
+    function toggleChat() {
+        const win = document.getElementById('chatWindow');
+        win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    function handleEnter(e) { if (e.key === 'Enter') sendMessage(); }
+    function openEditModal() { alert("হিসাব পরিবর্তনের জন্য এডমিনের সাথে যোগাযোগ করুন।"); }
+    function openProfileModal() { alert("তথ্য পরিবর্তনের জন্য এডমিনের সাথে যোগাযোগ করুন।"); }
+    function openNoticeModal() { alert("শুধুমাত্র এডমিন নোটিশ দিতে পারবেন।"); }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+
+{
+  "name": "আন্-নূর খিদমাহ্",
+  "short_name": "আন্-নূর",
+  "start_url": "/annoor/user.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0056b3",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "An.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "An.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
