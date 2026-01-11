@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>এডমিন কন্ট্রোল - আন্-নূর খিদমাহ্</title>
     
-    <!-- ফন্ট লোড (SolaimanLipi) -->
+    <!-- ফন্ট লোড -->
     <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -21,19 +21,8 @@
             --secondary-teal: #00897b;
         }
 
-        /* গ্লোবাল ফন্ট পরিবর্তন */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'SolaimanLipi', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            padding-bottom: 30px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'SolaimanLipi', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-dark); padding-bottom: 30px; }
 
         /* --- হেডার --- */
         .header {
@@ -44,74 +33,14 @@
             border-bottom-right-radius: 35px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            overflow: hidden; 
         }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 5px;
-            flex-wrap: nowrap;
-            width: 100%;
-            padding: 0 5px;
-        }
-
-        .logo-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 2px solid var(--primary-blue);
-            object-fit: cover;
-            background: white;
-            flex-shrink: 0;
-        }
-
-        .header-texts {
-            text-align: left;
-            flex: 1;
-            min-width: 0;
-        }
-
-        .org-name-bn {
-            font-family: 'SolaimanLipi', sans-serif !important; 
-            font-size: 1.8rem;
-            color: var(--primary-blue);
-            font-weight: 700;
-            line-height: 1.1;
-            white-space: nowrap;
-        }
-
-        .org-name-en {
-            font-family: 'SolaimanLipi', sans-serif;
-            font-size: 1.25rem;
-            color: var(--primary-blue);
-            font-weight: 800;
-            text-transform: uppercase;
-            line-height: 1.2;
-            white-space: nowrap;
-            margin-top: 5px;
-        }
-
-        .address-pill {
-            background-color: var(--pill-gray);
-            color: white;
-            display: inline-block;
-            padding: 3px 15px;
-            border-radius: 15px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin: 5px 0 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .tagline {
-            font-size: 1.2rem;
-            color: black;
-            font-weight: 500;
-            font-family: 'SolaimanLipi', sans-serif; 
-        }
+        .header-content { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 5px; width: 100%; padding: 0 5px; }
+        .logo-img { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--primary-blue); object-fit: cover; background: white; flex-shrink: 0; }
+        .header-texts { text-align: left; flex: 1; min-width: 0; }
+        .org-name-bn { font-size: 1.8rem; color: var(--primary-blue); font-weight: 700; line-height: 1.1; white-space: nowrap; }
+        .org-name-en { font-size: 1.25rem; color: var(--primary-blue); font-weight: 800; text-transform: uppercase; line-height: 1.2; white-space: nowrap; margin-top: 5px; }
+        .address-pill { background-color: var(--pill-gray); color: white; display: inline-block; padding: 3px 15px; border-radius: 15px; font-size: 0.95rem; font-weight: 600; margin: 5px 0 8px; }
+        .tagline { font-size: 1.2rem; color: black; font-weight: 500; }
 
         @media (max-width: 480px) {
             .logo-img { width: 65px; height: 65px; }
@@ -119,370 +48,185 @@
             .org-name-en { font-size: 4.2vw; } 
         }
 
-        /* --- এডমিন কন্টেন্ট --- */
-        .admin-label {
-            text-align: center;
-            margin: 15px 0 10px;
-            font-weight: 800;
-            color: #d32f2f;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-        }
+        .admin-label { text-align: center; margin: 15px 0 10px; font-weight: 800; color: #d32f2f; text-transform: uppercase; font-size: 0.9rem; }
+        .container { padding: 0 15px; max-width: 700px; margin: 0 auto; }
 
-        .container {
-            padding: 0 15px;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* --- কন্ট্রোল বাটন গ্রুপ --- */
-        .top-controls {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .btn-ctrl {
-            border: none;
-            padding: 10px 15px;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-            color: white;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-            position: relative; 
-        }
+        /* --- কন্ট্রোল বাটন --- */
+        .top-controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+        .btn-ctrl { border: none; padding: 10px 15px; border-radius: 25px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: white; box-shadow: 0 3px 8px rgba(0,0,0,0.15); position: relative; }
         .btn-ctrl:active { transform: scale(0.96); }
-
         .btn-notice { background: #673ab7; }
         .btn-add-mem { background: #2e7d32; }
         .btn-chat { background: #0084ff; }
 
-        /* নোটিফিকেশন ব্যাজ স্টাইল */
-        .msg-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
+        .msg-badge { position: absolute; top: -5px; right: -5px; background-color: #ff0000; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.75rem; font-weight: bold; border: 2px solid white; display: none; z-index: 10; }
+
+        .search-box { background: white; padding: 10px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 10px; }
+        .search-box input { flex: 1; border: none; padding: 10px; outline: none; font-size: 1rem; }
+
+        /* --- ড্যাশবোর্ড --- */
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+        .dash-card { background: white; padding: 15px 12px; border-radius: 15px; display: flex; align-items: center; gap: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; position: relative; overflow: hidden; }
+        .c-deposit { border-left: 5px solid #2e7d32; }
+        .c-loan { border-left: 5px solid #d32f2f; }
+        .c-welfare { border-left: 5px solid #0288d1; cursor: pointer; }
+        .c-expense { border-left: 5px solid #f57c00; cursor: pointer; }
+        .dash-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: white; }
+        .bg-deposit { background: #e8f5e9; color: #2e7d32; }
+        .bg-loan { background: #ffebee; color: #d32f2f; }
+        .bg-welfare { background: #e1f5fe; color: #0288d1; }
+        .bg-expense { background: #fff3e0; color: #f57c00; }
+        .d-info { display: flex; flex-direction: column; }
+        .d-title { font-size: 0.8rem; color: #666; font-weight: 600; white-space: nowrap;}
+        .d-value { font-size: 1.1rem; color: #333; font-weight: 800; }
+        .edit-hint { position: absolute; top: 5px; right: 5px; font-size: 0.6rem; color: #aaa; }
+
+        /* --- লিস্ট --- */
+        .member-list-card, .investment-list-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .investment-list-card { margin-bottom: 20px; }
+        .list-header { background: var(--primary-blue); color: white; padding: 12px 20px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .member-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; border-bottom: 1px solid #f0f0f0; }
+        .member-info { flex-grow: 1; cursor: pointer; }
+        .m-name { font-weight: 700; color: #333; font-size: 1.1rem; display: block; }
+        .m-id { font-size: 0.85rem; color: #777; }
+        .member-controls { display: flex; align-items: center; gap: 15px; flex-shrink: 0; }
+        .status-badge { font-size: 0.75rem; padding: 4px 10px; border-radius: 10px; font-weight: 700; }
+        .active { background: #e8f5e9; color: #2e7d32; }
+        .inactive { background: #ffebee; color: #c62828; }
+        .m-delete-btn { color: #ef4444; background-color: #fee2e2; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.9rem; }
+
+        /* --- মডাল --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; overflow-y: auto; backdrop-filter: blur(3px); }
+        .modal-content { background: white; width: 92%; max-width: 550px; margin: 20px auto; border-radius: 20px; padding: 20px; position: relative; }
+
+        /* --- চ্যাট ড্যাশবোর্ড স্টাইল --- */
+        .chat-container {
+            display: flex;
+            height: 550px; 
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+            position: relative;
+        }
+        
+        .chat-users-list {
+            width: 40%;
+            background: #fff;
+            border-right: 1px solid #eee;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .chat-box-area {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .chat-users-list {
+                width: 100%;
+                position: absolute;
+                top: 0; bottom: 0; left: 0;
+                z-index: 1;
+            }
+            .chat-box-area {
+                width: 100%;
+                position: absolute;
+                top: 0; bottom: 0; left: 100%; 
+                z-index: 2;
+                background: white;
+            }
+            .chat-box-area.show-chat {
+                left: 0;
+            }
+        }
+
+        .chat-user-item { padding: 12px; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: background 0.2s; border-bottom: 1px solid #f5f5f5; }
+        .chat-user-item:hover { background: #f5f5f5; }
+        .chat-user-item.active { background: #e3f2fd; }
+        
+        .u-avatar { width: 48px; height: 48px; background: #ddd; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: #666; flex-shrink: 0; }
+        .u-details { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+        .u-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+        .u-name { font-weight: 600; font-size: 1rem; color: #050505; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        .u-badge {
             background-color: #ff0000;
             color: white;
             border-radius: 50%;
             padding: 2px 6px;
             font-size: 0.75rem;
             font-weight: bold;
-            border: 2px solid white;
-            display: none; 
-            z-index: 10;
+            margin-left: 8px;
+            display: inline-block;
+            min-width: 20px;
+            text-align: center;
         }
 
-        .search-box {
-            background: white;
-            padding: 10px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .u-time { font-size: 0.7rem; color: #65676b; white-space: nowrap; margin-left: auto; }
+        .u-last-msg { font-size: 0.85rem; color: #65676b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+        .chat-user-item.unread .u-name, .chat-user-item.unread .u-last-msg { font-weight: 800; color: #000; }
+        .chat-user-item.unread .u-time { color: var(--primary-blue); font-weight: bold; }
 
-        .search-box input {
-            flex: 1;
-            border: none;
-            padding: 10px;
-            outline: none;
-            font-size: 1rem;
-            font-family: 'SolaimanLipi', sans-serif;
-        }
-
-        /* --- ড্যাশবোর্ড গ্রিড --- */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .dash-card {
-            background: white;
-            padding: 15px 12px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border: 1px solid #f0f0f0;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.2s;
-        }
-        .dash-card:active { transform: scale(0.98); }
-
-        .c-deposit { border-left: 5px solid #2e7d32; }
-        .c-loan { border-left: 5px solid #d32f2f; }
-        .c-welfare { border-left: 5px solid #0288d1; cursor: pointer; }
-        .c-expense { border-left: 5px solid #f57c00; cursor: pointer; }
-
-        .dash-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: white;
-        }
-        
-        .bg-deposit { background: #e8f5e9; color: #2e7d32; }
-        .bg-loan { background: #ffebee; color: #d32f2f; }
-        .bg-welfare { background: #e1f5fe; color: #0288d1; }
-        .bg-expense { background: #fff3e0; color: #f57c00; }
-
-        .d-info {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .d-title { font-size: 0.8rem; color: #666; font-weight: 600; white-space: nowrap;}
-        .d-value { font-size: 1.1rem; color: #333; font-weight: 800; font-family: 'SolaimanLipi', sans-serif;}
-        .edit-hint { position: absolute; top: 5px; right: 5px; font-size: 0.6rem; color: #aaa; }
-
-        /* --- তালিকা কার্ড --- */
-        .member-list-card, .investment-list-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .investment-list-card {
-             margin-bottom: 20px; 
-        }
-
-        .list-header {
-            background: var(--primary-blue);
-            color: white;
-            padding: 12px 20px;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .member-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            border-bottom: 1px solid #f0f0f0;
-            transition: 0.2s;
-        }
-        .member-item:active { background: #f5f5f5; }
-        
-        .member-info {
-            flex-grow: 1;
-            cursor: pointer;
-        }
-
-        .m-name { font-weight: 700; color: #333; font-size: 1.1rem; display: block; }
-        .m-id { font-size: 0.85rem; color: #777; }
-        
-        .member-controls {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-shrink: 0;
-        }
-        
-        .status-badge { font-size: 0.75rem; padding: 4px 10px; border-radius: 10px; font-weight: 700; }
-        .active { background: #e8f5e9; color: #2e7d32; }
-        .inactive { background: #ffebee; color: #c62828; }
-        
-        .m-delete-btn {
-            color: #ef4444; 
-            background-color: #fee2e2; 
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            font-size: 0.9rem;
-        }
-        .m-delete-btn:hover {
-            background-color: #fecaca;
-        }
-
-
-        /* --- মডাল --- */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            overflow-y: auto;
-            backdrop-filter: blur(3px);
-        }
-
-        .modal-content {
-            background: white;
-            width: 92%;
-            max-width: 550px;
-            margin: 20px auto;
-            border-radius: 20px;
-            padding: 20px;
-            position: relative;
-        }
-
-        /* --- চ্যাট ড্যাশবোর্ড স্টাইল --- */
-        .chat-container {
-            display: flex;
-            height: 500px;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        
-        .chat-users-list {
-            width: 35%;
-            background: #f8fafc;
-            border-right: 1px solid #eee;
-            overflow-y: auto;
-        }
-
-        .chat-box-area {
-            width: 65%;
-            display: flex;
-            flex-direction: column;
-            background: #fff;
-        }
-
-        .chat-user-item {
-            padding: 12px;
+        .chat-header-bar {
+            padding: 10px 15px;
             border-bottom: 1px solid #eee;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        .chat-user-item.active { background: #e3f2fd; border-left: 4px solid #0084ff; }
-        .chat-user-item .u-name { font-weight: bold; display: block; }
-        .chat-user-item .u-id { font-size: 0.75rem; color: #777; }
-
-        .chat-messages {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             gap: 10px;
-            background: #f1f5f9;
+            background: #fff;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            z-index: 5;
         }
 
-        .msg {
-            max-width: 80%;
-            padding: 8px 12px;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            line-height: 1.4;
-            position: relative;
+        .back-icon {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+            padding: 5px;
+            display: none; 
         }
-        .msg-user { align-self: flex-start; background: white; color: #333; border-bottom-left-radius: 2px; }
-        .msg-admin { align-self: flex-end; background: #0084ff; color: white; border-bottom-right-radius: 2px; }
-        .msg-time { font-size: 0.65rem; display: block; margin-top: 4px; opacity: 0.7; }
-
-        .chat-input-group {
-            padding: 10px;
-            display: flex;
-            gap: 8px;
-            border-top: 1px solid #eee;
-        }
-        .chat-input-group input { margin-bottom: 0; flex: 1; font-family: 'SolaimanLipi', sans-serif; }
-        .btn-send { background: #0084ff; color: white; border: none; padding: 0 15px; border-radius: 8px; cursor: pointer; }
-
-        @media (max-width: 500px) {
-            .chat-container { flex-direction: column; height: 600px; }
-            .chat-users-list { width: 100%; height: 150px; }
-            .chat-box-area { width: 100%; height: 450px; }
+        
+        @media (max-width: 768px) {
+            .back-icon { display: block; }
         }
 
+        .chat-title { font-weight: bold; color: #0056b3; font-size: 1.1rem; }
+
+        .chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; background: #f0f2f5; }
+        .msg { max-width: 75%; padding: 8px 14px; border-radius: 18px; font-size: 0.95rem; line-height: 1.4; position: relative; word-wrap: break-word; }
+        .msg-user { align-self: flex-start; background: #e4e6eb; color: #050505; border-bottom-left-radius: 4px; }
+        .msg-admin { align-self: flex-end; background: #0084ff; color: white; border-bottom-right-radius: 4px; }
+        .msg-time { font-size: 0.65rem; display: block; margin-top: 4px; opacity: 0.7; text-align: right; }
+
+        .chat-input-group { padding: 10px; display: flex; gap: 8px; border-top: 1px solid #eee; background: white; }
+        .chat-input-group input { margin-bottom: 0; flex: 1; border-radius: 20px; padding: 10px 15px; background: #f0f2f5; border: none; font-size: 1rem;}
+        .chat-input-group input:focus { outline: none; background: #e4e6eb; }
+        .btn-send { background: none; color: #0084ff; border: none; padding: 0 12px; cursor: pointer; font-size: 1.3rem; }
+
+        /* --- অন্যান্য --- */
         .grid-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         h4 { margin: 15px 0 10px; color: var(--primary-blue); border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            outline: none;
-            font-family: 'SolaimanLipi', sans-serif;
-        }
-        
+        input, select, textarea { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem; outline: none; }
         textarea { resize: vertical; min-height: 80px; }
-
-        .btn-save {
-            background: var(--secondary-teal);
-            color: white;
-            border: none;
-            padding: 15px;
-            width: 100%;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
+        .btn-save { background: var(--secondary-teal); color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 10px; }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #999; }
-
-        .notice-list {
-            list-style: none;
-            padding:0;
-            margin-top: 15px;
-            max-height: 250px;
-            overflow-y: auto;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
-        }
-        .notice-item, .investment-item {
-            background: #f8fafc;
-            padding: 10px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
+        .notice-list { list-style: none; padding:0; margin-top: 15px; max-height: 250px; overflow-y: auto; border-top: 1px solid #eee; padding-top: 10px; }
+        .notice-item, .investment-item { background: #f8fafc; padding: 10px; margin-bottom: 8px; border-radius: 8px; display: flex; justify-content: space-between; align-items: flex-start; }
         .notice-item { border-left: 4px solid #673ab7; }
         .investment-item { border-left: 4px solid var(--secondary-teal); }
-
         .n-content { flex: 1; margin-right: 10px; }
         .n-date { display: block; font-size: 0.75rem; color: #888; margin-bottom: 3px; }
-        .n-text { font-size: 0.95rem; color: #333; line-height: 1.3; font-family: 'SolaimanLipi', sans-serif; }
-        .n-delete { 
-            color: #ef4444; 
-            background: #fee2e2; 
-            width: 30px; height: 30px; 
-            border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; 
-            cursor: pointer; font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-
+        .n-text { font-size: 0.95rem; color: #333; line-height: 1.3; }
+        .n-delete { color: #ef4444; background: #fee2e2; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.9rem; flex-shrink: 0; }
         @media (max-width: 400px) { .grid-inputs { grid-template-columns: 1fr; } }
     </style>
 </head>
-<body>
+<body style="display:none;">
 
     <!-- হেডার -->
     <header class="header">
@@ -500,27 +244,21 @@
     <div class="admin-label"><i class="fas fa-tools"></i> Admin Control Panel</div>
 
     <div class="container">
-        <!-- কন্ট্রোল বাটন গ্রুপ -->
+        <!-- কন্ট্রোল বাটন -->
         <div class="top-controls">
-            <button class="btn-ctrl btn-notice" onclick="openNoticeModal()">
-                <i class="fas fa-bullhorn"></i> নোটিশ
-            </button>
-            <button class="btn-ctrl btn-add-mem" onclick="openAddMemberModal()">
-                <i class="fas fa-user-plus"></i> সদস্য যোগ
-            </button>
+            <button class="btn-ctrl btn-notice" onclick="openNoticeModal()"><i class="fas fa-bullhorn"></i> নোটিশ</button>
+            <button class="btn-ctrl btn-add-mem" onclick="openAddMemberModal()"><i class="fas fa-user-plus"></i> সদস্য যোগ</button>
             <button class="btn-ctrl btn-chat" onclick="openChatModal()">
                 <i class="fab fa-facebook-messenger"></i> চ্যাট বক্স 
                 <span id="chatCountBadge" class="msg-badge">0</span>
             </button>
         </div>
 
-        <!-- সর্বশেষ বিনিয়োগ (নতুন স্থান) -->
+        <!-- সর্বশেষ বিনিয়োগ -->
         <div class="investment-list-card">
             <div class="list-header" style="background: var(--secondary-teal);">
                 <span><i class="fas fa-chart-line"></i> সর্বশেষ বিনিয়োগ</span>
-                <button class="btn-ctrl" style="background: white; color: black; font-size: 0.8rem; padding: 5px 12px; box-shadow: none;" onclick="openInvestmentModal()">
-                    <i class="fas fa-plus"></i> নতুন যোগ
-                </button>
+                <button class="btn-ctrl" style="background: white; color: black; font-size: 0.8rem; padding: 5px 12px; box-shadow: none;" onclick="openInvestmentModal()"><i class="fas fa-plus"></i> নতুন যোগ</button>
             </div>
             <div id="investmentContainer" style="padding: 15px; max-height: 300px; overflow-y: auto;">
                 <p style="text-align:center; padding: 20px; color:#888;">লোড হচ্ছে...</p>
@@ -537,50 +275,30 @@
         <div class="dashboard-grid">
             <div class="dash-card c-deposit">
                 <div class="dash-icon bg-deposit"><i class="fas fa-coins"></i></div>
-                <div class="d-info">
-                    <span class="d-title">মোট জমা</span>
-                    <span class="d-value">৳ <span id="dash-total-deposit">0</span></span>
-                </div>
+                <div class="d-info"><span class="d-title">মোট জমা</span><span class="d-value">৳ <span id="dash-total-deposit">0</span></span></div>
             </div>
             <div class="dash-card c-loan">
                 <div class="dash-icon bg-loan"><i class="fas fa-hand-holding-usd"></i></div>
-                <div class="d-info">
-                    <span class="d-title">মোট ঋণ প্রদান</span>
-                    <span class="d-value">৳ <span id="dash-total-loan">0</span></span>
-                </div>
+                <div class="d-info"><span class="d-title">মোট ঋণ প্রদান</span><span class="d-value">৳ <span id="dash-total-loan">0</span></span></div>
             </div>
             <div class="dash-card c-welfare" onclick="updateOrgStat('welfare', 'কল্যাণ তহবিল')">
                 <i class="fas fa-edit edit-hint"></i>
                 <div class="dash-icon bg-welfare"><i class="fas fa-hand-holding-heart"></i></div>
-                <div class="d-info">
-                    <span class="d-title">কল্যাণ তহবিল</span>
-                    <span class="d-value">৳ <span id="dash-welfare">0</span></span>
-                </div>
+                <div class="d-info"><span class="d-title">কল্যাণ তহবিল</span><span class="d-value">৳ <span id="dash-welfare">0</span></span></div>
             </div>
             <div class="dash-card c-expense" onclick="updateOrgStat('expense', 'মোট খরচ')">
                 <i class="fas fa-edit edit-hint"></i>
                 <div class="dash-icon bg-expense"><i class="fas fa-file-invoice-dollar"></i></div>
-                <div class="d-info">
-                    <span class="d-title">মোট খরচ</span>
-                    <span class="d-value">৳ <span id="dash-expense">0</span></span>
-                </div>
+                <div class="d-info"><span class="d-title">মোট খরচ</span><span class="d-value">৳ <span id="dash-expense">0</span></span></div>
             </div>
         </div>
 
         <!-- সদস্য তালিকা -->
         <div class="member-list-card">
-            <div class="list-header">
-                <span>সদস্যদের তালিকা</span>
-                <span id="memberCount">...</span>
-            </div>
-            <div id="memberContainer">
-                <p style="text-align:center; padding: 20px; color:#888;">লোড হচ্ছে...</p>
-            </div>
+            <div class="list-header"><span>সদস্যদের তালিকা</span><span id="memberCount">...</span></div>
+            <div id="memberContainer"><p style="text-align:center; padding: 20px; color:#888;">লোড হচ্ছে...</p></div>
         </div>
-
     </div>
-
-    <!-- মডালসমূহ -->
 
     <!-- এডিট মডাল -->
     <div id="editModal" class="modal">
@@ -609,10 +327,7 @@
                     <div><label>ঋণ</label><input type="number" id="s-loan"></div>
                     <div>
                         <label style="color:red; font-weight:bold;">অ্যাকাউন্ট স্ট্যাটাস</label>
-                        <select id="s-status">
-                            <option value="active">Active (চালু)</option>
-                            <option value="inactive">Inactive (বন্ধ)</option>
-                        </select>
+                        <select id="s-status"><option value="active">Active (চালু)</option><option value="inactive">Inactive (বন্ধ)</option></select>
                     </div>
                 </div>
                 <button type="button" class="btn-save" onclick="saveData()">তথ্য আপডেট করুন</button>
@@ -625,12 +340,9 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('addMemberModal')">&times;</span>
             <h2 style="margin-bottom:15px; color:var(--secondary-teal);"><i class="fas fa-user-plus"></i> নতুন সদস্য ফরম</h2>
-            <label>মেম্বার আইডি <span style="color:red">*</span></label>
-            <input type="number" id="new-id" placeholder="যেমন: 101">
-            <label>সদস্যের নাম <span style="color:red">*</span></label>
-            <input type="text" id="new-name" placeholder="পুরো নাম">
-            <label>সদস্য নং</label>
-            <input type="text" id="new-memNo" placeholder="যেমন: M-01">
+            <label>মেম্বার আইডি <span style="color:red">*</span></label><input type="number" id="new-id" placeholder="যেমন: 101">
+            <label>সদস্যের নাম <span style="color:red">*</span></label><input type="text" id="new-name" placeholder="পুরো নাম">
+            <label>সদস্য নং</label><input type="text" id="new-memNo" placeholder="যেমন: M-01">
             <button class="btn-save" onclick="createMember()">অ্যাকাউন্ট তৈরি করুন</button>
         </div>
     </div>
@@ -659,14 +371,23 @@
 
     <!-- চ্যাট ড্যাশবোর্ড মডাল -->
     <div id="chatModal" class="modal">
-        <div class="modal-content" style="max-width: 800px;">
-            <span class="close-btn" onclick="closeModal('chatModal')">&times;</span>
-            <h2 style="margin-bottom:15px; color:#0084ff;"><i class="fas fa-comments"></i> চ্যাট ড্যাশবোর্ড</h2>
-            <div class="chat-container">
+        <div class="modal-content" style="max-width: 800px; padding:0; overflow: hidden; height: 90vh; display: flex; flex-direction: column;">
+            <span class="close-btn" style="z-index: 10; background: white; border-radius: 50%; padding: 5px; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);" onclick="closeModal('chatModal')">&times;</span>
+            
+            <div class="chat-container" style="height: 100%; border:none;">
+                
+                <!-- বাম পাশ: ইউজার লিস্ট -->
                 <div class="chat-users-list" id="chatUserList"></div>
-                <div class="chat-box-area">
-                    <div id="activeChatHeader" style="padding:10px; border-bottom:1px solid #eee; font-weight:bold; color:#0056b3;">সদস্য নির্বাচন করুন</div>
+                
+                <!-- ডান পাশ: চ্যাট এরিয়া -->
+                <div class="chat-box-area" id="chatBoxArea">
+                    <div class="chat-header-bar">
+                        <i class="fas fa-arrow-left back-icon" onclick="backToChatList()"></i>
+                        <span id="activeChatHeader" class="chat-title">সদস্য নির্বাচন করুন</span>
+                    </div>
+                    
                     <div class="chat-messages" id="chatMessages"></div>
+                    
                     <div class="chat-input-group">
                         <input type="text" id="adminMsgInput" placeholder="মেসেজ লিখুন..." onkeypress="handleChatKey(event)">
                         <button class="btn-send" onclick="sendAdminMessage()"><i class="fas fa-paper-plane"></i></button>
@@ -699,22 +420,20 @@
         let allNotices = {};
         let allInvestments = {};
         let activeChatUserId = "";
-        
-        // সর্বশেষ এডমিন চেক করার সময় (লোকাল স্টোরেজ থেকে)
         let lastAdminCheckTime = localStorage.getItem('lastAdminCheckTime') || 0;
+        
+        // প্রতিটি ইউজারের জন্য সর্বশেষ পড়ার সময় ট্র্যাক করার ভেরিয়েবল
+        let userReadTime = {};
 
-        // নোটিফিকেশন পারমিশন চাওয়া
         function requestNotificationPermission() {
             if ("Notification" in window) {
-                Notification.requestPermission().then(permission => {
-                    console.log("Notification permission:", permission);
-                });
+                Notification.requestPermission().then(permission => { console.log("Notification permission:", permission); });
             }
         }
 
-        // ডাটা লোড ও নোটিফিকেশন মনিটর
         function loadData() {
             requestNotificationPermission();
+            document.body.style.display = "block"; // পাসওয়ার্ড সঠিক হলে বডি দেখাবে
 
             db.ref('users').on('value', (snapshot) => {
                 allMembers = snapshot.val() || {};
@@ -738,29 +457,16 @@
                 renderInvestments();
             });
 
-            // চ্যাট মনিটরিং এবং নতুন মেসেজ কাউন্ট
             db.ref('chats').on('value', (snapshot) => {
                 const chatData = snapshot.val() || {};
                 let unreadUserCount = 0;
-                let hasNewNotification = false;
-
-                // প্রতিটি ইউজারের চ্যাট চেক করা
                 Object.values(chatData).forEach(userChats => {
                     const messages = Object.values(userChats);
-                    // ইউজারের পাঠানো মেসেজগুলো বের করা এবং সময়ের ভিত্তিতে সর্ট করা
                     const userMessages = messages.filter(m => m.sender === 'user').sort((a,b) => b.timestamp - a.timestamp);
-                    
                     if(userMessages.length > 0) {
-                        const lastMsgTime = userMessages[0].timestamp;
-                        // যদি মেসেজের সময় এডমিনের শেষ চেক করার সময়ের চেয়ে বেশি হয়
-                        if(lastMsgTime > lastAdminCheckTime) {
-                            unreadUserCount++;
-                            hasNewNotification = true;
-                        }
+                        if(userMessages[0].timestamp > lastAdminCheckTime) unreadUserCount++;
                     }
                 });
-                
-                // ব্যাজ আপডেট
                 const badge = document.getElementById('chatCountBadge');
                 if(unreadUserCount > 0) {
                     badge.innerText = unreadUserCount;
@@ -768,44 +474,23 @@
                 } else {
                     badge.style.display = 'none';
                 }
-
-                // যদি চ্যাট মডাল খোলা থাকে তবে লিস্ট রেন্ডার করা
-                if(document.getElementById('chatModal').style.display === 'block') {
-                    renderChatUserList(chatData);
-                }
+                renderChatUserList(chatData);
             });
         }
         
-        // সাউন্ড বাজানো
-        function playNotificationSound() {
-            const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-software-interface-start-2574.mp3'); 
-            audio.play().catch(e => console.log("Sound blocked"));
-        }
-
         function updateOrgStat(key, label) {
             const targetId = (key === 'welfare') ? 'dash-welfare' : 'dash-expense';
             const currentVal = document.getElementById(targetId).innerText.replace(/,/g, '');
             const newVal = prompt(`${label} এর নতুন পরিমাণ লিখুন:`, currentVal);
-            
-            if (newVal !== null && newVal.trim() !== "") {
-                const numericValue = Number(newVal);
-                if (!isNaN(numericValue)) {
-                    db.ref('org_stats/' + key).set(numericValue)
-                    .then(() => console.log(label + " আপডেট সফল!"))
-                    .catch((error) => alert("ত্রুটি: " + error.message));
-                } else {
-                    alert("দয়া করে সঠিক সংখ্যা লিখুন।");
-                }
+            if (newVal !== null && newVal.trim() !== "" && !isNaN(Number(newVal))) {
+                db.ref('org_stats/' + key).set(Number(newVal));
             }
         }
 
         function calculateDashboard(members) {
             let totalDeposit = 0, totalLoan = 0;
             Object.values(members).forEach(m => {
-                if(m.stats) {
-                    totalDeposit += Number(m.stats.total || 0);
-                    totalLoan += Number(m.stats.loan || 0);
-                }
+                if(m.stats) { totalDeposit += Number(m.stats.total || 0); totalLoan += Number(m.stats.loan || 0); }
             });
             document.getElementById('dash-total-deposit').innerText = totalDeposit.toLocaleString('en-US');
             document.getElementById('dash-total-loan').innerText = totalLoan.toLocaleString('en-US');
@@ -814,38 +499,21 @@
         function renderList(members) {
             const container = document.getElementById('memberContainer');
             container.innerHTML = '';
-            
-            // সদস্যদের লিস্ট অবজেক্ট থেকে অ্যারেতে রূপান্তর এবং সর্টিং
-            const memberArray = Object.keys(members).map(key => {
-                return { id: key, ...members[key] };
-            });
-
-            // সদস্য নং অনুযায়ী সর্টিং লজিক (Natural Sort)
-            memberArray.sort((a, b) => {
-                const noA = a.profile.memNo || "";
-                const noB = b.profile.memNo || "";
-                return noA.localeCompare(noB, undefined, { numeric: true, sensitivity: 'base' });
-            });
-
+            const memberArray = Object.keys(members).map(key => ({ id: key, ...members[key] }));
+            memberArray.sort((a, b) => (a.profile.memNo || "").localeCompare(b.profile.memNo || "", undefined, { numeric: true, sensitivity: 'base' }));
             document.getElementById('memberCount').innerText = memberArray.length + " জন";
 
             memberArray.forEach(m => {
-                const id = m.id;
-                const name = m.profile.name || 'নাম নেই';
-                const memNo = m.profile.memNo || 'N/A';
                 const statusCls = m.status === 'active' ? 'active' : 'inactive';
-                
                 container.innerHTML += `
                     <div class="member-item">
-                        <div class="member-info" onclick="openEditModal('${id}')">
-                            <span class="m-name">${name}</span>
-                            <span class="m-id">আইডি: ${id} | নং: ${memNo}</span>
+                        <div class="member-info" onclick="openEditModal('${m.id}')">
+                            <span class="m-name">${m.profile.name || 'নাম নেই'}</span>
+                            <span class="m-id">আইডি: ${m.id} | নং: ${m.profile.memNo || 'N/A'}</span>
                         </div>
                         <div class="member-controls">
                             <span class="status-badge ${statusCls}">${m.status}</span>
-                            <div class="m-delete-btn" onclick="confirmDeleteMember(event, '${id}', '${name}')" title="সদস্য মুছুন">
-                                <i class="fas fa-trash-alt"></i>
-                            </div>
+                            <div class="m-delete-btn" onclick="confirmDeleteMember(event, '${m.id}', '${m.profile.name}')"><i class="fas fa-trash-alt"></i></div>
                         </div>
                     </div>`;
             });
@@ -853,13 +521,8 @@
 
         function confirmDeleteMember(event, id, name) {
             event.stopPropagation();
-            const confirmation = confirm(`আপনি কি নিশ্চিতভাবে "${name}" (আইডি: ${id}) কে মুছে ফেলতে চান? এই প্রক্রিয়াটি আর ফেরানো যাবে না।`);
-            
-            if (confirmation) {
-                db.ref('users/' + id).remove()
-                    .then(() => db.ref('chats/' + id).remove())
-                    .then(() => alert(`"${name}" কে সফলভাবে মুছে ফেলা হয়েছে।`))
-                    .catch((error) => alert("সদস্যকে মুছতে একটি সমস্যা হয়েছে।"));
+            if (confirm(`আপনি কি নিশ্চিতভাবে "${name}" কে মুছে ফেলতে চান?`)) {
+                db.ref('users/' + id).remove().then(() => db.ref('chats/' + id).remove()).then(() => alert("সদস্য মুছে ফেলা হয়েছে।"));
             }
         }
 
@@ -867,49 +530,88 @@
             const term = document.getElementById('searchInput').value.toLowerCase();
             const filtered = {};
             Object.keys(allMembers).forEach(id => {
-                const m = allMembers[id];
-                const name = m.profile.name || "";
-                if(id.includes(term) || name.toLowerCase().includes(term)) {
-                    filtered[id] = m;
-                }
+                if(id.includes(term) || (allMembers[id].profile.name || "").toLowerCase().includes(term)) filtered[id] = allMembers[id];
             });
             renderList(filtered);
         }
 
         function openChatModal() {
             document.getElementById('chatModal').style.display = 'block';
-            
-            // মডাল ওপেন করার মানে এডমিন মেসেজগুলো চেক করেছেন
             lastAdminCheckTime = Date.now();
             localStorage.setItem('lastAdminCheckTime', lastAdminCheckTime);
-            
-            // ব্যাজ লুকিয়ে ফেলা
             document.getElementById('chatCountBadge').style.display = 'none';
+            backToChatList();
+        }
 
-            db.ref('chats').once('value').then(snap => renderChatUserList(snap.val() || {}));
+        function backToChatList() {
+            document.getElementById('chatBoxArea').classList.remove('show-chat');
+            activeChatUserId = "";
         }
         
         function renderChatUserList(chatData) {
             const listDiv = document.getElementById('chatUserList');
             listDiv.innerHTML = '';
+            let usersList = [];
             Object.keys(chatData).forEach(uid => {
-                const userName = allMembers[uid] ? allMembers[uid].profile.name : "অজানা";
-                const activeCls = (uid === activeChatUserId) ? 'active' : '';
-                listDiv.innerHTML += `<div class="chat-user-item ${activeCls}" onclick="selectConversation('${uid}', '${userName}')">
-                    <span class="u-name">${userName}</span><span class="u-id">আইডি: ${uid}</span></div>`;
+                const userName = allMembers[uid] ? allMembers[uid].profile.name : "সদস্য (" + uid + ")";
+                const msgs = Object.values(chatData[uid]).sort((a,b) => a.timestamp - b.timestamp);
+                const lastMsgObj = msgs[msgs.length - 1];
+                
+                const thresholdTime = Math.max(lastAdminCheckTime, (userReadTime[uid] || 0));
+                let userUnreadCount = 0;
+                msgs.forEach(m => {
+                    if(m.sender === 'user' && m.timestamp > thresholdTime) {
+                        userUnreadCount++;
+                    }
+                });
+
+                usersList.push({ 
+                    uid, 
+                    name: userName, 
+                    lastMsg: lastMsgObj ? lastMsgObj.text : "...", 
+                    timestamp: lastMsgObj ? lastMsgObj.timestamp : 0, 
+                    unreadCount: userUnreadCount 
+                });
+            });
+            usersList.sort((a, b) => b.timestamp - a.timestamp);
+
+            usersList.forEach(u => {
+                const activeCls = (u.uid === activeChatUserId) ? 'active' : '';
+                const unreadCls = u.unreadCount > 0 ? 'unread' : '';
+                const timeStr = u.timestamp > 0 ? new Date(u.timestamp).toLocaleTimeString('en-US', {hour: 'numeric', minute:'2-digit'}) : "";
+                const firstLetter = u.name.charAt(0).toUpperCase();
+                
+                const badgeHtml = u.unreadCount > 0 ? `<span class="u-badge">${u.unreadCount}</span>` : '';
+
+                listDiv.innerHTML += `
+                    <div class="chat-user-item ${activeCls} ${unreadCls}" onclick="selectConversation('${u.uid}', '${u.name}')">
+                        <div class="u-avatar">${firstLetter}</div>
+                        <div class="u-details">
+                            <div class="u-top-row">
+                                <span class="u-name">${u.name}</span>
+                                ${badgeHtml}
+                                <span class="u-time">${timeStr}</span>
+                            </div>
+                            <span class="u-last-msg">${u.lastMsg}</span>
+                        </div>
+                    </div>`;
             });
         }
         
         function selectConversation(uid, name) {
             activeChatUserId = uid;
-            document.getElementById('activeChatHeader').innerText = "চ্যাট: " + name;
+            userReadTime[uid] = Date.now();
+            
+            db.ref('chats').once('value').then(snap => renderChatUserList(snap.val() || {}));
+
+            document.getElementById('activeChatHeader').innerText = name;
+            document.getElementById('chatBoxArea').classList.add('show-chat');
+
             db.ref('chats/' + uid).on('value', (snapshot) => {
                 const messages = snapshot.val() || {};
                 const msgDiv = document.getElementById('chatMessages');
                 msgDiv.innerHTML = '';
-                const sortedMessages = Object.values(messages).sort((a,b) => a.timestamp - b.timestamp);
-                
-                sortedMessages.forEach(m => {
+                Object.values(messages).sort((a,b) => a.timestamp - b.timestamp).forEach(m => {
                     const typeCls = m.sender === 'admin' ? 'msg-admin' : 'msg-user';
                     const timeString = m.timestamp ? new Date(m.timestamp).toLocaleTimeString('bn-BD', {hour: '2-digit', minute:'2-digit'}) : '';
                     msgDiv.innerHTML += `<div class="msg ${typeCls}">${m.text}<span class="msg-time">${timeString}</span></div>`;
@@ -923,16 +625,8 @@
         function sendAdminMessage() {
             const text = document.getElementById('adminMsgInput').value.trim();
             if(!activeChatUserId || !text) return;
-            
-            const message = {
-                sender: 'admin',
-                text: text,
-                timestamp: firebase.database.ServerValue.TIMESTAMP 
-            };
-            
-            db.ref('chats/' + activeChatUserId).push(message).then(() => {
-                document.getElementById('adminMsgInput').value = '';
-            });
+            db.ref('chats/' + activeChatUserId).push({ sender: 'admin', text: text, timestamp: firebase.database.ServerValue.TIMESTAMP })
+            .then(() => { document.getElementById('adminMsgInput').value = ''; });
         }
 
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
@@ -940,49 +634,41 @@
         function openEditModal(id) {
             currentEditID = id;
             const m = allMembers[id];
+            const p = m.profile || {}, s = m.stats || {};
             document.getElementById('modalTitle').innerText = "এডিট আইডি: " + id;
-            const profile = m.profile || {};
-            const stats = m.stats || {};
             
-            document.getElementById('p-name').value = profile.name || '';
-            document.getElementById('p-memNo').value = profile.memNo || '';
-            document.getElementById('p-share').value = profile.share || '';
-            document.getElementById('p-oneShare').value = profile.oneShare || '';
-            document.getElementById('p-nominee').value = profile.nominee || '';
-            document.getElementById('p-address').value = profile.address || '';
-            document.getElementById('p-bg').value = profile.bg || '';
-            
-            document.getElementById('s-total').value = stats.total || 0;
-            document.getElementById('s-last').value = stats.last || 0;
-            document.getElementById('s-date').value = stats.lastDate || '';
-            document.getElementById('s-due').value = stats.due || 0;
-            document.getElementById('s-pTotal').value = stats.profitTotal || 0;
-            document.getElementById('s-pYear').value = stats.profitYear || 0;
-            document.getElementById('s-loan').value = stats.loan || 0;
-            
+            ['name', 'memNo', 'share', 'oneShare', 'nominee', 'address', 'bg'].forEach(k => document.getElementById('p-'+k).value = p[k] || '');
+            document.getElementById('s-total').value = s.total || 0;
+            document.getElementById('s-last').value = s.last || 0;
+            document.getElementById('s-date').value = s.lastDate || '';
+            document.getElementById('s-due').value = s.due || 0;
+            document.getElementById('s-pTotal').value = s.profitTotal || 0;
+            document.getElementById('s-pYear').value = s.profitYear || 0;
+            document.getElementById('s-loan').value = s.loan || 0;
             document.getElementById('s-status').value = m.status || 'active';
+            
             document.getElementById('editModal').style.display = 'block';
         }
 
         function saveData() {
             const updated = {
-                profile: { name: document.getElementById('p-name').value, memNo: document.getElementById('p-memNo').value, share: document.getElementById('p-share').value, oneShare: document.getElementById('p-oneShare').value, nominee: document.getElementById('p-nominee').value, address: document.getElementById('p-address').value, bg: document.getElementById('p-bg').value },
-                stats: { total: Number(document.getElementById('s-total').value), last: Number(document.getElementById('s-last').value), lastDate: document.getElementById('s-date').value, due: Number(document.getElementById('s-due').value), profitTotal: Number(document.getElementById('s-pTotal').value), profitYear: Number(document.getElementById('s-pYear').value), loan: Number(document.getElementById('s-loan').value) },
+                profile: { 
+                    name: document.getElementById('p-name').value, memNo: document.getElementById('p-memNo').value, 
+                    share: document.getElementById('p-share').value, oneShare: document.getElementById('p-oneShare').value, 
+                    nominee: document.getElementById('p-nominee').value, address: document.getElementById('p-address').value, 
+                    bg: document.getElementById('p-bg').value 
+                },
+                stats: { 
+                    total: Number(document.getElementById('s-total').value), last: Number(document.getElementById('s-last').value), 
+                    lastDate: document.getElementById('s-date').value, due: Number(document.getElementById('s-due').value), 
+                    profitTotal: Number(document.getElementById('s-pTotal').value), profitYear: Number(document.getElementById('s-pYear').value), 
+                    loan: Number(document.getElementById('s-loan').value) 
+                },
                 status: document.getElementById('s-status').value
             };
             db.ref('users/' + currentEditID).update(updated).then(() => {
-                
-                // --- নোটিফিকেশন লজিক ---
-                const notifData = {
-                    title: "তথ্য হালনাগাদ",
-                    body: "এডমিন আপনার হিসাব বা প্রোফাইলের তথ্য আপডেট করেছেন। অ্যাপে প্রবেশ করে চেক করুন।",
-                    timestamp: firebase.database.ServerValue.TIMESTAMP
-                };
-                db.ref('notifications/' + currentEditID).push(notifData);
-                // ---------------------
-
-                alert("তথ্য আপডেট করা হয়েছে এবং সদস্যের কাছে নোটিফিকেশন পাঠানো হয়েছে!");
-                closeModal('editModal');
+                db.ref('notifications/' + currentEditID).push({ title: "তথ্য হালনাগাদ", body: "এডমিন আপনার তথ্য আপডেট করেছেন।", timestamp: firebase.database.ServerValue.TIMESTAMP });
+                alert("তথ্য আপডেট সফল!"); closeModal('editModal');
             });
         }
 
@@ -991,21 +677,9 @@
             const id = document.getElementById('new-id').value.trim();
             const name = document.getElementById('new-name').value.trim();
             const memNo = document.getElementById('new-memNo').value.trim();
-            if (!id || !name) {
-                alert("মেম্বার আইডি এবং নাম অবশ্যই পূরণ করতে হবে।");
-                return;
-            }
-            db.ref('users/' + id).set({
-                profile: { name: name, memNo: memNo, share: '0', oneShare: '0', nominee: '', address: '', bg: '' },
-                stats: { total: 0, last: 0, lastDate: '', due: 0, loan: 0, profitTotal: 0, profitYear: 0 },
-                status: 'active'
-            }).then(() => { 
-                alert("নতুন সদস্য যোগ করা হয়েছে।");
-                closeModal('addMemberModal'); 
-                document.getElementById('new-id').value = '';
-                document.getElementById('new-name').value = '';
-                document.getElementById('new-memNo').value = '';
-            });
+            if (!id || !name) { alert("আইডি ও নাম আবশ্যক।"); return; }
+            db.ref('users/' + id).set({ profile: { name, memNo, share:'0', oneShare:'0' }, stats: { total:0 }, status: 'active' })
+            .then(() => { alert("সদস্য যোগ হয়েছে।"); closeModal('addMemberModal'); });
         }
 
         function openNoticeModal() { document.getElementById('noticeModal').style.display = 'block'; }
@@ -1013,70 +687,49 @@
             const text = document.getElementById('newNoticeText').value.trim();
             if(!text) return;
             const date = new Date().toLocaleDateString('bn-BD', { day: '2-digit', month: '2-digit', year: 'numeric' });
-            db.ref('notices').push({ text: text, date: date })
-            .then(() => { document.getElementById('newNoticeText').value = ''; });
+            db.ref('notices').push({ text, date }).then(() => document.getElementById('newNoticeText').value = '');
         }
-        function deleteNotice(k) { if(confirm("আপনি কি এই নোটিশটি মুছতে চান?")) db.ref('notices/' + k).remove(); }
+        function deleteNotice(k) { if(confirm("মুছতে চান?")) db.ref('notices/' + k).remove(); }
         function renderAdminNotices() {
             const list = document.getElementById('adminNoticeList');
-            list.innerHTML = '';
-            if (Object.keys(allNotices).length === 0) {
-                list.innerHTML = '<p style="text-align:center;color:#999;">কোনো নোটিশ নেই।</p>';
-                return;
-            }
+            list.innerHTML = Object.keys(allNotices).length ? '' : '<p style="text-align:center;color:#999;">নোটিশ নেই।</p>';
             Object.keys(allNotices).reverse().forEach(k => {
-                const n = allNotices[k];
-                list.innerHTML += `<li class="notice-item"><div class="n-content"><span class="n-date">${n.date}</span><div class="n-text">${n.text}</div></div>
-                    <div class="n-delete" onclick="deleteNotice('${k}')"><i class="fas fa-trash-alt"></i></div></li>`;
+                list.innerHTML += `<li class="notice-item"><div class="n-content"><span class="n-date">${allNotices[k].date}</span><div class="n-text">${allNotices[k].text}</div></div><div class="n-delete" onclick="deleteNotice('${k}')"><i class="fas fa-trash-alt"></i></div></li>`;
             });
         }
 
         function openInvestmentModal() { document.getElementById('investmentModal').style.display = 'block'; }
-        
         function addInvestment() {
             const text = document.getElementById('newInvestmentText').value.trim();
             if(!text) return;
             const date = new Date().toLocaleDateString('bn-BD', { day: '2-digit', month: '2-digit', year: 'numeric' });
-            db.ref('investments').push({ text: text, date: date })
-            .then(() => { 
-                document.getElementById('newInvestmentText').value = ''; 
-                closeModal('investmentModal');
-                alert("বিনিয়োগের তথ্য যোগ করা হয়েছে।");
-            });
+            db.ref('investments').push({ text, date }).then(() => { document.getElementById('newInvestmentText').value = ''; closeModal('investmentModal'); alert("বিনিয়োগ যোগ হয়েছে।"); });
         }
-
-        function deleteInvestment(k) { if(confirm("আপনি কি এই বিনিয়োগের তথ্যটি মুছতে চান?")) db.ref('investments/' + k).remove(); }
-        
+        function deleteInvestment(k) { if(confirm("মুছতে চান?")) db.ref('investments/' + k).remove(); }
         function renderInvestments() {
             const container = document.getElementById('investmentContainer');
-            container.innerHTML = '';
-            if (Object.keys(allInvestments).length === 0) {
-                container.innerHTML = '<p style="text-align:center;color:#999;">কোনো বিনিয়োগের তথ্য নেই।</p>';
-                return;
-            }
-            
-            const list = document.createElement('ul');
-            list.style.listStyle = 'none';
-            list.style.padding = '0';
-
+            container.innerHTML = Object.keys(allInvestments).length ? '' : '<p style="text-align:center;color:#999;">তথ্য নেই।</p>';
+            const list = document.createElement('ul'); list.style.listStyle='none'; list.style.padding='0';
             Object.keys(allInvestments).reverse().forEach(k => {
-                const inv = allInvestments[k];
-                const listItem = document.createElement('li');
-                listItem.className = 'investment-item';
-                listItem.innerHTML = `
-                    <div class="n-content">
-                        <span class="n-date">${inv.date}</span>
-                        <div class="n-text">${inv.text}</div>
-                    </div>
-                    <div class="n-delete" onclick="deleteInvestment('${k}')" title="মুছে ফেলুন">
-                        <i class="fas fa-trash-alt"></i>
-                    </div>`;
-                list.appendChild(listItem);
+                list.innerHTML += `<li class="investment-item"><div class="n-content"><span class="n-date">${allInvestments[k].date}</span><div class="n-text">${allInvestments[k].text}</div></div><div class="n-delete" onclick="deleteInvestment('${k}')"><i class="fas fa-trash-alt"></i></div></li>`;
             });
-            container.appendChild(list);
+            if(Object.keys(allInvestments).length) container.appendChild(list);
         }
 
-        window.onload = loadData;
+        // পাসওয়ার্ড সুরক্ষা
+        window.onload = function() {
+            // পাসওয়ার্ড পরিবর্তন করতে চাইলে নিচের "123456" এর জায়গায় নতুন পাসওয়ার্ড লিখুন
+            const adminPass = "Admin58"; 
+            
+            const userParams = prompt("অনুগ্রহ করে এডমিন পাসওয়ার্ড দিন:");
+            
+            if(userParams === adminPass) {
+                loadData();
+            } else {
+                document.body.style.display = "block"; // বডি দেখাবে কিন্তু এরর মেসেজসহ
+                document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;color:red;font-family:sans-serif;text-align:center;"><div><h1>❌ ভুল পাসওয়ার্ড!</h1><p>প্রবেশাধিকার নেই।</p><button onclick="location.reload()" style="padding:10px 20px;margin-top:10px;cursor:pointer;">আবার চেষ্টা করুন</button></div></div>';
+            }
+        };
     </script>
 </body>
 </html>
