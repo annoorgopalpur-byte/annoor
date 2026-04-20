@@ -252,14 +252,15 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyBkRUcyisQYgIScMknjRNKqrmCLpZUd3yU",
-      authDomain: "annoor-foundation.firebaseapp.com",
-      projectId: "annoor-foundation",
-      storageBucket: "annoor-foundation.firebasestorage.app",
-      messagingSenderId: "823540670524",
-      appId: "1:823540670524:web:7ff8f0bfaca7e81d67a339",
-      measurementId: "G-PRC8XZGVPW"
+ const firebaseConfig = { 
+        apiKey: "AIzaSyBkRUcyisQYgIScMknjRNKqrmCLpZUd3yU", 
+        authDomain: "annoor-foundation.firebaseapp.com", 
+        projectId: "annoor-foundation", 
+        databaseURL: "https://annoor-foundation-default-rtdb.firebaseio.com", 
+        storageBucket: "annoor-foundation.firebasestorage.app", 
+        messagingSenderId: "823540670524", 
+        appId: "1:823540670524:web:7ff8f0bfaca7e81d67a339", 
+        measurementId: "G-PRC8XZGVPW" 
     };
 
         firebase.initializeApp(firebaseConfig);
