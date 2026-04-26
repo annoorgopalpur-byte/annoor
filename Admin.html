@@ -207,17 +207,35 @@
     <div id="editModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('editModal')">&times;</span>
-            <h2 id="modalTitle">এডিট করুন</h2>
+            <h2 id="modalTitle" style="margin-bottom: 15px;">এডিট করুন</h2>
             <form id="editForm">
-                <h4>প্রোফাইল তথ্য</h4>
+                <h4 style="margin-bottom: 10px; color: var(--primary-blue);"><i class="fas fa-user-edit"></i> প্রোফাইল তথ্য</h4>
                 <div class="grid-inputs">
                     <div><label>নাম</label><input type="text" id="p-name"></div>
                     <div><label>সদস্য নং</label><input type="text" id="p-memNo"></div>
+                    <div><label>শেয়ার সংখ্যা</label><input type="number" id="p-share"></div>
+                    <div><label>মাসিক জমা</label><input type="number" id="p-oneShare"></div>
+                    <div><label>নমিনি</label><input type="text" id="p-nominee"></div>
+                    <div><label>ঠিকানা</label><input type="text" id="p-address"></div>
+                    <div><label>রক্তের গ্রুপ</label><input type="text" id="p-bg" placeholder="যেমন: O+"></div>
                 </div>
-                <h4>হিসাব তথ্য</h4>
+
+                <h4 style="margin-top: 15px; margin-bottom: 10px; color: var(--primary-blue);"><i class="fas fa-wallet"></i> হিসাব তথ্য</h4>
                 <div class="grid-inputs">
                     <div><label>মোট জমা</label><input type="number" id="s-total"></div>
+                    <div><label>সর্বশেষ জমা</label><input type="number" id="s-last"></div>
+                    <div><label>সর্বশেষ জমার তারিখ</label><input type="text" id="s-lastDate" placeholder="যেমন: ১২/০৫/২০২৪"></div>
+                    <div><label>বকেয়া</label><input type="number" id="s-due"></div>
+                    <div><label>মোট লভ্যাংশ</label><input type="number" id="s-profitTotal"></div>
+                    <div><label>বাৎসরিক লভ্যাংশ</label><input type="number" id="s-profitYear"></div>
                     <div><label>ঋণ</label><input type="number" id="s-loan"></div>
+                    <div>
+                        <label>অ্যাকাউন্ট স্ট্যাটাস</label>
+                        <select id="u-status">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
                 </div>
                 <button type="button" class="btn-save" onclick="saveData()">তথ্য আপডেট করুন</button>
             </form>
@@ -342,19 +360,53 @@
             currentEditID = id;
             const m = allMembers[id];
             document.getElementById('modalTitle').innerText = "এডিট আইডি: " + id;
+            
+            // Profile Info Data
             document.getElementById('p-name').value = m.profile.name || '';
             document.getElementById('p-memNo').value = m.profile.memNo || '';
+            document.getElementById('p-share').value = m.profile.share || '';
+            document.getElementById('p-oneShare').value = m.profile.oneShare || '';
+            document.getElementById('p-nominee').value = m.profile.nominee || '';
+            document.getElementById('p-address').value = m.profile.address || '';
+            document.getElementById('p-bg').value = m.profile.bg || '';
+
+            // Stats Info Data
             document.getElementById('s-total').value = m.stats.total || 0;
+            document.getElementById('s-last').value = m.stats.last || 0;
+            document.getElementById('s-lastDate').value = m.stats.lastDate || '';
+            document.getElementById('s-due').value = m.stats.due || 0;
+            document.getElementById('s-profitTotal').value = m.stats.profitTotal || 0;
+            document.getElementById('s-profitYear').value = m.stats.profitYear || 0;
             document.getElementById('s-loan').value = m.stats.loan || 0;
+
+            // Account Status
+            document.getElementById('u-status').value = m.status || 'active';
+            
             openModal('editModal');
         }
 
         function saveData() {
             const updated = {
+                // Profile Path
                 'profile/name': document.getElementById('p-name').value,
                 'profile/memNo': document.getElementById('p-memNo').value,
+                'profile/share': document.getElementById('p-share').value,
+                'profile/oneShare': document.getElementById('p-oneShare').value,
+                'profile/nominee': document.getElementById('p-nominee').value,
+                'profile/address': document.getElementById('p-address').value,
+                'profile/bg': document.getElementById('p-bg').value,
+
+                // Stats Path
                 'stats/total': Number(document.getElementById('s-total').value),
-                'stats/loan': Number(document.getElementById('s-loan').value)
+                'stats/last': Number(document.getElementById('s-last').value),
+                'stats/lastDate': document.getElementById('s-lastDate').value,
+                'stats/due': Number(document.getElementById('s-due').value),
+                'stats/profitTotal': Number(document.getElementById('s-profitTotal').value),
+                'stats/profitYear': Number(document.getElementById('s-profitYear').value),
+                'stats/loan': Number(document.getElementById('s-loan').value),
+
+                // Account Status
+                'status': document.getElementById('u-status').value
             };
             db.ref('users/' + currentEditID).update(updated).then(() => {
                 alert("তথ্য আপডেট সফল!"); closeModal('editModal');
@@ -365,7 +417,28 @@
             const id = document.getElementById('new-id').value.trim();
             const name = document.getElementById('new-name').value.trim();
             if (!id || !name) { alert("আইডি ও নাম আবশ্যক।"); return; }
-            db.ref('users/' + id).set({ profile: { name, memNo: document.getElementById('new-memNo').value }, stats: { total:0, loan:0 }, status: 'active' })
+            
+            db.ref('users/' + id).set({ 
+                profile: { 
+                    name: name, 
+                    memNo: document.getElementById('new-memNo').value, 
+                    share: '', 
+                    oneShare: '', 
+                    nominee: '', 
+                    address: '', 
+                    bg: '' 
+                }, 
+                stats: { 
+                    total: 0, 
+                    last: 0, 
+                    lastDate: '', 
+                    due: 0, 
+                    profitTotal: 0, 
+                    profitYear: 0, 
+                    loan: 0 
+                }, 
+                status: 'active' 
+            })
             .then(() => { alert("সদস্য যোগ হয়েছে।"); closeModal('addMemberModal'); });
         }
 
